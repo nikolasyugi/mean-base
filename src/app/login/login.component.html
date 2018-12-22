@@ -1,0 +1,21 @@
+<div id="page-bk">
+	<div class="container">
+		<div id="body">
+			<p>Admin <b>Lorem ipsum</b></p>
+			<form id="login-box">
+				<label class="inputWrapper" style="margin-top:0px;">
+					<input type="email" name="login" [(ngModel)]="email" placeholder="LOGIN">
+				</label>
+				<label class="inputWrapper">
+					<input type="password" name="password" [(ngModel)]="password" placeholder="SENHA">
+				</label>
+				<a>
+					<button type="submit" *ngIf="!loading" class="btn-blue-fill" (click)="login()">
+						Entrar
+					</button>
+					<button class="btn-blue-fill" *ngIf="loading"><i class="fas fa-spinner fa-spin "></i></button>
+				</a>
+			</form>
+		</div>
+	</div>
+</div>

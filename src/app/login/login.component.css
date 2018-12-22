@@ -1,0 +1,56 @@
+#page-bk {
+    background-image: url('../../assets/images/background-img.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+#body {
+    min-width: 150px;
+    width: 30%;
+    left: 35%;
+    position: absolute !important;
+    top: 50%;
+    margin-top: -230px;
+    display: block;
+}
+
+#login-box {
+    background: white;
+    border-radius: 3px;
+    padding: 40px 50px;
+    -webkit-box-shadow: 10px 0px 47px 0px rgba(204, 204, 204, 1);
+    -moz-box-shadow: 10px 0px 47px 0px rgba(204, 204, 204, 1);
+    box-shadow: 10px 0px 47px 0px rgba(204, 204, 204, 1);
+}
+
+label {
+    margin: 15px 0;
+}
+
+button {
+    width: 100%;
+}
+
+p {
+    font-size: 36px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+@media only screen and (max-width:991px) {
+    #body {
+        width: 50%;
+        left: 25%;
+    }
+}
+
+@media only screen and (max-width:576px) {
+    #body {
+        width: 75%;
+        left: 13%;
+    }
+}
