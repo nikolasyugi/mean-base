@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 
 import { Notauth } from './interceptors/notauth.interceptor';
 import { Test } from './interceptors/test.interceptor';
+import keys from '../../keys';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
@@ -40,7 +41,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		ModalModule.forRoot(),
 		HttpClientModule,
 		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyDEtC5S0y-p1ybbvnfvHhQUKwxlzfxSD9s'
+			apiKey: keys.googleApiKey
 		}),
 		NgbModule.forRoot(),
 		Ng5SliderModule,
