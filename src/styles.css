@@ -117,7 +117,7 @@ select {
     position: absolute;
     top: 70px;
     background: var(--grey);
-    width: 100%;
+    width: calc(100vw - 300px);
     height: calc(100vh - 70px);
 }
 
@@ -145,6 +145,7 @@ select {
     .pageWrapper {
         top: 70px;
         left: 0px;
+        width: 100%;
     }
     .loading {
         left: 0px;
