@@ -45,11 +45,11 @@
 					</div>
 					<div class="submenu" [hidden]="!userClicked">
 						<ul>
-							<li routerLink="/users/common" (click)="mobileOpen=false" [ngClass]="getPathClassSubMenu('common')">
+							<li routerLink="/users/super_users" (click)="mobileOpen=false" [ngClass]="getPathClassSubMenu('super_users')">
 								<i class="far fa-user"></i>
 								<span>Super usuários</span>
 							</li>
-							<li style="border:none;" routerLink="/users/super_users" (click)="mobileOpen=false" [ngClass]="getPathClassSubMenu('super_users')">
+							<li style="border:none;" routerLink="/users/common" (click)="mobileOpen=false" [ngClass]="getPathClassSubMenu('common')">
 								<i class="fas fa-user"></i>
 								<span>Usuários comuns</span>
 							</li>
