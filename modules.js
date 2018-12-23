@@ -31,5 +31,8 @@ module.exports = function () {
 	// https://www.npmjs.com/package/bcryptjs
 	modules.bcrypt = require('bcryptjs');
 
+	// https://www.npmjs.com/package/helmet
+	modules.helmet = require('helmet');
+
 	return modules;
 }

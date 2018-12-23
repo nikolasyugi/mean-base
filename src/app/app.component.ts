@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mean-base';
+
+	isLoginComponent() {
+		let currentPath = location.pathname.replace('/', '')
+		if (currentPath == '' || currentPath == 'login') {
+			return true
+		}
+		return false
+	}
+
 }

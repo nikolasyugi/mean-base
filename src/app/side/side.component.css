@@ -1,0 +1,172 @@
+/* HEADER */
+
+#main-header {
+    height: 70px;
+    position: fixed;
+    background: var(--primary);
+    width: 100%;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -ms-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    z-index: 99;
+}
+
+p {
+    position: relative;
+    top: 10%;
+    font-size: 20px;
+    color: white;
+    padding: 15px;
+}
+
+.fa-bars {
+    padding: 0px 15px 0px 10px;
+    cursor: pointer;
+}
+
+/* HEADER */
+
+aside {
+    top: 70px;
+    position: fixed;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -ms-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s;
+    background: var(--white);
+    width: 300px;
+    overflow: hidden;
+    display: inline-block;
+    height: calc(100vh - 70px);
+    z-index: 11 !important;
+}
+
+img {
+    height: 100px;
+    margin: 0px auto;
+    display: block;
+    width: auto;
+    padding: 15px 0;
+}
+
+#logo-box {
+    background: var(--secondary);
+}
+
+#user-info {
+    padding: 0px 0px 15px 15px;
+    color: white;
+}
+
+#dropdown-btn {
+    position: absolute;
+    right: 15px;
+    border: none;
+    outline: none;
+    color: white;
+    background: none;
+}
+
+#dropdown-login {
+    position: absolute;
+    right: 15px;
+    top: 155px;
+    background: white;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    -ms-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s;
+    z-index: 3;
+}
+
+#dropdown-login ul li {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    border-bottom: 1px solid var(--grey1);
+    padding: 15px;
+    cursor: pointer;
+}
+
+#dropdown-login ul li:hover {
+    background: var(--grey);
+}
+
+li span {
+    margin-left: 15px;
+}
+
+ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+#menu header {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 15px;
+    background: var(--grey1);
+}
+
+.itemWrapper {
+    border-bottom: 1px solid var(--grey);
+}
+
+.fa-plus, .fa-minus {
+    left: 145px;
+    position: relative;
+}
+
+.menu-item {
+    padding: 15px;
+}
+
+.menu-item:hover {
+    background: var(--grey);
+    cursor: pointer;
+}
+
+.submenu li {
+    border: none;
+    padding: 15px 0px 15px 30px
+}
+
+.submenu li:hover {
+    background: var(--grey);
+    cursor: pointer;
+}
+
+#main-ul {
+    height: calc(100vh - 265px);
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+
+.active-menu {
+    color: #009688;
+}

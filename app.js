@@ -7,6 +7,9 @@ const express = modules.express;
 const app = express();
 const path = modules.path;
 const cors = modules.cors;
+const helmet = modules.helmet;
+
+app.use(helmet());
 
 let corsSettings = {
     origin: true,

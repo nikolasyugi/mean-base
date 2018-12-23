@@ -18,16 +18,22 @@ import { LoginComponent } from './login/login.component';
 
 import { Notauth } from './interceptors/notauth.interceptor';
 import { Test } from './interceptors/test.interceptor';
-import keys from '../../keys';
+import { HomeComponent } from './home/home.component';
+import { SideComponent } from './side/side.component';
+import { SuperUsersComponent } from './super-users/super-users.component';
+import { UsersComponent } from './users/users.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
 };
-
 @NgModule({
 	declarations: [
 		AppComponent,
-		LoginComponent
+		LoginComponent,
+		HomeComponent,
+		SideComponent,
+		SuperUsersComponent,
+		UsersComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -41,7 +47,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		ModalModule.forRoot(),
 		HttpClientModule,
 		AgmCoreModule.forRoot({
-			apiKey: keys.googleApiKey
+			apiKey: ''
 		}),
 		NgbModule.forRoot(),
 		Ng5SliderModule,
