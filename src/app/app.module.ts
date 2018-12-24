@@ -12,12 +12,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import { DataTablesModule } from 'angular-datatables';
+
+import { Test } from './interceptors/test.interceptor';
+import { Notauth } from './interceptors/notauth.interceptor';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
-import { Notauth } from './interceptors/notauth.interceptor';
-import { Test } from './interceptors/test.interceptor';
 import { HomeComponent } from './home/home.component';
 import { SideComponent } from './side/side.component';
 import { SuperUsersComponent } from './super-users/super-users.component';
@@ -52,7 +53,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		NgbModule.forRoot(),
 		Ng5SliderModule,
 		NgxMaskModule.forRoot(),
-		NgxImageGalleryModule
+		NgxImageGalleryModule,
+		DataTablesModule
 	],
 	exports: [
 		ModalModule

@@ -12,12 +12,18 @@
     z-index: 99;
 }
 
-p {
+header p, header b {
     position: relative;
     top: 10%;
     font-size: 20px;
     color: white;
     padding: 15px;
+}
+
+@media only screen and (max-width:576px) {
+    header p, header b {
+        font-size: 16px;
+    }
 }
 
 .fa-bars {
@@ -117,7 +123,7 @@ ul {
 }
 
 .fa-plus, .fa-minus {
-    left: 145px;
+    left: 155px;
     position: relative;
 }
 
@@ -142,7 +148,7 @@ ul {
 
 #main-ul {
     height: calc(100vh - 265px);
-    overflow-y: auto;
+    overflow-y: auto !important;
 }
 
 ::-webkit-scrollbar {
