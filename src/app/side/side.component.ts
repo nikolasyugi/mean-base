@@ -13,12 +13,15 @@ export class SideComponent implements OnInit {
 		if (location.pathname.split('/').length > 2) {
 			this.userClicked = true;
 		}
+		window.addEventListener("resize", function () {
+			return window.innerWidth;
+		});
 	}
 
 	closeAll() {
 		this.userClicked = false;
 	}
-	
+
 	dropdownOpen: boolean = false;
 	mobileOpen: boolean = false;
 
