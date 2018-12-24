@@ -21,6 +21,7 @@ export class UsersComponent implements OnDestroy, OnInit {
 	) { }
 
 	ngOnInit(): void {
+		window.scrollTo(0, 0);
 		this.loading = true;
 		this.getUsers();
 		this.dtOptions = {
@@ -53,6 +54,6 @@ export class UsersComponent implements OnDestroy, OnInit {
 
 	openDelete(user) {
 		user.optionsOpened = false;
-		this.app.openGenericModal('Tem certeza que deseja remover este usuário?', 'Atenção', 'logout');
+		this.app.openRemoveModal('Tem certeza que deseja remover este usuário?', 'Atenção', 'user');
 	}
 }

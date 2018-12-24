@@ -23,6 +23,7 @@ export class SuperUsersComponent implements OnDestroy, OnInit {
 
 	ngOnInit(): void {
 		this.loading = true;
+		window.scrollTo(0, 0);
 		this.getUsers();
 		this.dtOptions = {
 			pagingType: 'full_numbers',

@@ -23,6 +23,8 @@ import { HomeComponent } from './home/home.component';
 import { SideComponent } from './side/side.component';
 import { SuperUsersComponent } from './super-users/super-users.component';
 import { UsersComponent } from './users/users.component';
+import { UsersCreateComponent } from './users-create/users-create.component';
+import { UsersUpdateComponent } from './users-update/users-update.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
@@ -35,6 +37,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		SideComponent,
 		SuperUsersComponent,
 		UsersComponent,
+		UsersCreateComponent,
+		UsersUpdateComponent,
 	],
 	imports: [
 		BrowserModule,

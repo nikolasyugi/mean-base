@@ -8,8 +8,7 @@
         <div class="text-center contentModal">
             <!-- <img src="../assets/img/logo.svg"> -->
             <h4 class="modal-title">{{h}}</h4>
-            <p *ngIf="name != 'policy'">{{p}}</p>
-            <p *ngIf="name == 'policy'" [innerHtml]="p" style="text-align: justify;"></p>
+            <p>{{p}}</p>
             <!-- Simple Modal -->
             <div *ngIf="name == 'simple'">
                 <article>
@@ -21,6 +20,28 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <button class="btn-submit" aria-label="Sim" (click)="logOut();modalRef.hide()">Sim</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn-submit no-btn" aria-label="Não" (click)="modalRef.hide()">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Remove Modal -->
+<ng-template #removeModal>
+    <div class="modal-body modal-form">
+        <span class="close" aria-label="Close" id="close" (click)="modalRef.hide()"><i style="font-size: 25px" class="fas fa-times"></i></span>
+        <div class="text-center contentModal">
+            <!-- <img src="../assets/img/logo.svg"> -->
+            <h4 class="modal-title">{{hRemove}}</h4>
+            <p>{{pRemove}}</p>
+            <div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn-submit" aria-label="Sim" (click)="remove(nameRemove)">Sim</button>
                     </div>
                     <div class="col-lg-6">
                         <button class="btn-submit no-btn" aria-label="Não" (click)="modalRef.hide()">Não</button>

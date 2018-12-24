@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
 	@ViewChild('genericModal') genericModal: ElementRef;
+	@ViewChild('removeModal') removeModal: ElementRef;
 
 	constructor(
 		private modalService: BsModalService,
@@ -53,6 +54,24 @@ export class AppComponent {
 		this.name = name;
 		this.openModal(this.genericModal);
 
+	}
+
+	pRemove = "";
+	hRemove = "";
+	nameRemove = "";
+	openRemoveModal(paragraph, header, name) {
+		this.pRemove = paragraph;
+		this.hRemove = header;
+		this.nameRemove = name;
+		this.openModal(this.removeModal);
+	}
+
+	remove(name) {
+		if (name == 'user') { //remove user
+			this.modalRef.hide();
+			this.openGenericModal('Usuário removido com sucesso!', 'Parabéns!', 'simple')
+			window.location.reload(true);
+		}
 	}
 
 	validateEmail(email) {

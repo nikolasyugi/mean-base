@@ -12,7 +12,7 @@
 					<h5 class="pageTitle">Lista de Usuários</h5>
 				</div>
 				<div class="col-lg-4 text-right">
-					<button class="btn-secondary-fill"><i class="fas fa-plus"></i>Adicionar Usuário</button>
+					<button class="btn-secondary-fill" routerLink="/users/common/create"><i class="fas fa-plus"></i>Adicionar Usuário</button>
 				</div>
 			</div>
 		</div>
@@ -32,8 +32,8 @@
 						<td><button class="options-btn" (click)="user.optionsOpened = !user.optionsOpened">Opções<i class="fas fa-chevron-down"></i></button>
 							<div class="options-dropdown" [hidden]="!user.optionsOpened">
 								<ul>
-									<li>Detalhes</li>
-									<li>Editar</li>
+									<!-- <li>Detalhes</li> -->
+									<li routerLink="/users/common/update/{{user._id}}">Editar</li>
 									<li (click)="openDelete(user)">Remover</li>
 								</ul>
 							</div>
