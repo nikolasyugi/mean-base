@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RequestsService } from '../requests.service';
 import { Subject } from 'rxjs';
+import { AppComponent } from '../app.component';
 
 @Component({
 	selector: 'app-users',
@@ -15,7 +16,8 @@ export class UsersComponent implements OnDestroy, OnInit {
 
 
 	constructor(
-		private requests: RequestsService
+		private requests: RequestsService,
+		private app: AppComponent
 	) { }
 
 	ngOnInit(): void {
@@ -47,5 +49,10 @@ export class UsersComponent implements OnDestroy, OnInit {
 	}
 	ngOnDestroy(): void {
 		this.dtTrigger.unsubscribe();
+	}
+
+	openDelete(user) {
+		user.optionsOpened = false;
+		this.app.openGenericModal('Tem certeza que deseja remover este usuário?', 'Atenção', 'logout');
 	}
 }

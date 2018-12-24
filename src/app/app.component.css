@@ -1,0 +1,23 @@
+button {
+    margin: 0 auto;
+}
+
+.modal-form input {
+    width: 70%;
+    margin: 0 auto 20px;
+    display: block;
+    padding: 10px;
+    font-weight: 700;
+}
+
+.modal-form i {
+    color: white;
+}
+
+.modal-form img {
+    padding-bottom: 20px;
+}
+
+article {
+    display: inline-block;
+}

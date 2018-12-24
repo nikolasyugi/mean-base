@@ -211,6 +211,99 @@ table.dataTable tr:nth-child(even), table.dataTable tr {
     background-color: var(--grey1);
 }
 
+/* MODALS */
+
+.modal-form {
+    padding: 30px;
+    background: var(--secondary);
+    color: white;
+}
+
+.modalWrapper {
+    border-radius: 5px;
+}
+
+.modal-content {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+
+.modalHeader {
+    background: white;
+    border: 1px solid var(--grey1);
+    padding: 30px;
+}
+
+.modalTitle {
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.modalBody {
+    padding: 30px;
+    background: var(--white);
+}
+
+.close-modal-header {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+.btn-modal {
+    float: right;
+    margin: 30px 0 0 0;
+}
+
+.no-btn {
+    background: var(--primary);
+    color: white;
+    margin-left: 30px;
+}
+
+@media only screen and (max-width:991px) {
+    .no-btn {
+        margin-top: 15px !important;
+    }
+}
+
+.btnWrapper {
+    display: inline-block;
+}
+
+.btn-back {
+    margin: 30px 0 0 0;
+    float: left;
+}
+
+.btn-submit {
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    min-width: 200px;
+    color: var(--secondary);
+    background: white;
+}
+
+.btn-submit:hover {
+    color: white;
+    background: var(--primary);
+}
+
+.contentModal {
+    padding: 30px 0px;
+    margin: 35px 0px 15px 0px;
+}
+
+.modal-form p {
+    padding: 25px;
+}
+
+/* MODALS */
+
 @media only screen and (max-width: 576px) {
     .table-header button {
         width: 100%;

@@ -1,2 +1,32 @@
 <app-side *ngIf="!isLoginComponent()"></app-side>
 <router-outlet></router-outlet>
+
+<!-- Generic Modal -->
+<ng-template #genericModal>
+    <div class="modal-body modal-form">
+        <span class="close" aria-label="Close" id="close" (click)="modalRef.hide()"><i style="font-size: 25px" class="fas fa-times"></i></span>
+        <div class="text-center contentModal">
+            <!-- <img src="../assets/img/logo.svg"> -->
+            <h4 class="modal-title">{{h}}</h4>
+            <p *ngIf="name != 'policy'">{{p}}</p>
+            <p *ngIf="name == 'policy'" [innerHtml]="p" style="text-align: justify;"></p>
+            <!-- Simple Modal -->
+            <div *ngIf="name == 'simple'">
+                <article>
+                    <button aria-label="Ok" class="btn-submit" (click)="modalRef.hide()">Ok</button>
+                </article>
+            </div>
+            <!-- Logout Modal -->
+            <div *ngIf="name == 'logout'">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn-submit" aria-label="Sim" (click)="logOut();modalRef.hide()">Sim</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn-submit no-btn" aria-label="Não" (click)="modalRef.hide()">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
