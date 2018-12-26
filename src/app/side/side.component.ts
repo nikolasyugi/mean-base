@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-side',
@@ -9,10 +10,13 @@ import { AppComponent } from '../app.component';
 export class SideComponent implements OnInit {
 
 	constructor(
-		private app: AppComponent
+		private app: AppComponent,
+		private router: Router
 	) { }
 
 	ngOnInit() {
+		this.user = JSON.parse(localStorage.getItem('user'))
+		if (!this.user) this.router.navigate(['/'])
 		if (location.pathname.split('/').length > 2) {
 			this.userClicked = true;
 		}
@@ -21,11 +25,12 @@ export class SideComponent implements OnInit {
 		});
 	}
 
+	user: any;
 	openLogout() {
 		this.dropdownOpen = false;
 		this.app.openGenericModal('Tem certeza que deseja sair?', 'Atenção!', 'logout');
 	}
-	
+
 	closeAll() {
 		this.userClicked = false;
 	}

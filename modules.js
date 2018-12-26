@@ -34,5 +34,9 @@ module.exports = function () {
 	// https://www.npmjs.com/package/helmet
 	modules.helmet = require('helmet');
 
+	// http://www.passportjs.org/docs/
+	modules.passport = require('passport');
+	modules.passportLocal = require('passport-local');
+
 	return modules;
 }

@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/c
 import { Observable, EMPTY, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Injectable()
 export class Notauth implements HttpInterceptor {
@@ -21,6 +22,7 @@ export class Notauth implements HttpInterceptor {
                 if (err.status == 401) {
                     sessionStorage.clear()
                     localStorage.clear()
+                    this.router.navigate(['/'])
                     alert('Você precisa fazer login novamente.')
                     return EMPTY;
                 } else {

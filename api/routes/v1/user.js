@@ -9,19 +9,39 @@ module.exports = function (middlewares, moduleUser){
     		controllers.auth.signup(req, res);
     	});
 
-    	router.post("/login", function(req, res){
-    		controllers.auth.login(req, res);
-    	});
+        router.post("/sign_in", auth.local, function(req, res){
+    		controllers.auth.sign_in(req, res);
+        });
 
-        router.get("/user", auth.checkToken,  function(req, res){
+    	router.post("/login", auth.local, function(req, res){
+    		controllers.auth.login(req, res);
+        });
+
+        router.post("/logout", auth.local, function(req, res){
+    		controllers.auth.logout(req, res);
+        });
+
+        router.get("/users", auth.checkAdmin,  function(req, res){
             controllers.user.get(req, res);
         });
 
-        router.put("/user", auth.checkToken,  function(req, res){
+        router.get("/users/:id", auth.checkLogged,  function(req, res){
+            controllers.user.get(req, res);
+        });
+
+        router.put("/users/:id", auth.checkLogged,  function(req, res){
             controllers.user.put(req, res);
         });
 
-        router.put("/change-password", auth.checkToken,  function(req, res){
+        router.delete("/users/:id", auth.checkLogged,  function(req, res){
+            controllers.user.put(req, res);
+        });
+
+
+
+
+
+        router.put("/change-password", auth.checkLogged,  function(req, res){
             controllers.auth.changePassword(req, res);
         });
 

@@ -1,13 +1,13 @@
-module.exports = function (keys, modules, schemas, uidgen, transporter) {
+module.exports = function (keys, modules, schemas, transporter, uidgen) {
 
 	//Middlewares
 	var middlewares = {};
-	middlewares.auth = require(__basedir + '/api/middlewares/auth.js')(schemas);
+	middlewares.auth = require(__basedir + '/api/middlewares/auth.js')(schemas, modules.passport);
 
 	//User
 	var user = {};
 	user.controllers = {};
-	user.controllers.auth = require(__basedir + '/api/controllers/user/auth-controller.js')(keys, schemas, uidgen, transporter);
+	user.controllers.auth = require(__basedir + '/api/controllers/user/auth-controller.js')(keys, schemas, uidgen, transporter, modules.passport, modules.bcrypt);
 	user.controllers.user = require(__basedir + '/api/controllers/user/user-controller.js')(schemas);
 
 	//Test

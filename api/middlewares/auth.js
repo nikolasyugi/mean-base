@@ -1,21 +1,26 @@
-module.exports = function (schemas) {
-
-	var User = schemas.User;
+module.exports = function (schemas, passport) {
 
 	return {
-		checkToken: function (req, res, next) {
+		checkLogged: function (req, res, next) {
+			if (!req.user) {
+				res.status(401).send({ message: "You are not authenticated!" })
+			} else {
+				res.locals.user = req.user;
+				next();
+			}
+		},
 
-			User.find({ where: { token: req.headers.token } }).then(function (userDB) {
-				if (userDB) {
-					res.locals.user = userDB
+		checkAdmin: function (req, res, next) {
+			if (!req.user || req.user.role != 'admin') {
+				res.status(401).send({ message: "You are not authenticated!" })
+			} else {
+				res.locals.user = req.user;
+				next();
+			}
+		},
 
-					next();
-				} else {
-					res.status(400).json({ success: 'fail', message: 'You are not authenticated!' });
-				}
-			});
-
-		}
+		local:
+			passport.authenticate('local')
 	}
 
 }

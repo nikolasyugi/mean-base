@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
 	user;
 	login() {
 		this.loading = true;
-		this.requests.teste().subscribe(
+		this.requests.sign_in(this.email, this.password).subscribe(
 			response => {
 				this.user = response;
-				alert(this.user.name)
+				localStorage.setItem('user', JSON.stringify(this.user));
 			},
 			err => {
 				console.log(err)

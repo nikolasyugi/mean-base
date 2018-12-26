@@ -35,7 +35,7 @@ export class SuperUsersComponent implements OnDestroy, OnInit {
 	users;
 	loading;
 	getUsers() {
-		this.requests.teste().subscribe(
+		this.requests.getUsers().subscribe(
 			response => {
 				this.users = response;
 			},

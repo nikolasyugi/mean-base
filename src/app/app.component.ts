@@ -84,6 +84,18 @@ export class AppComponent {
 	}
 
 	logOut() {
+		this.requests.logout().subscribe(
+			response => {
+
+			},
+			err => {
+				console.log(err)
+			},
+			() => {
+
+			}
+
+		)
 		this.router.navigate(['/']);
 	}
 }

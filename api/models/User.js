@@ -6,6 +6,7 @@ module.exports = function (mongoose, bcrypt) {
 		name: { type: String, required: true },
 		password: { type: String, required: true },
 		email: { type: String, required: true, unique: true },
+		role: String,
 		token: String,
 		token_update: String,
 		new_password_token: String,
@@ -45,6 +46,10 @@ module.exports = function (mongoose, bcrypt) {
 			name: this.name,
 			email: this.email
 		};
+	};
+
+	userSchema.methods.verifyPassword = function (passwordSent) {
+		return bcrypt.compareSync(passwordSent, this.password);
 	};
 
 	var User = mongoose.model('User', userSchema);

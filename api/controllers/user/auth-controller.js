@@ -1,81 +1,41 @@
-module.exports = function (keys, schemas, uidgen, transporter) {
+module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt) {
 
 	var User = schemas.User;
-	var bcrypt = require('bcryptjs');
 	return {
-		
+
 		signup: function (req, res) {
 
 			var userData = req.body;
-
-			User.create(userData).then(function (userCreated) {
-				User.findAll({ where: { token: { [Op.ne]: null } }, attributes: ['token'] }).then(function (tokens) {
-
-					var token = uidgen.generateSync();
-
-					while (tokens.some(e => e.token === token)) {
-						token = uidgen.generateSync();
-					}
-
-					User.update({ token: token }, { where: userCreated.dataValues }).then(function (quantity) {
-						if (quantity[0] > 0) {
-							var user_email = req.body.email;
-							User.find({ where: { email: user_email } }).then(function (userDB) {
-
-								return res.json({ success: true, token: token, user: userDB });
-							})
-						} else {
-							return res.status(400).json({ success: false });
-						}
-					}).catch(function (err) {
-						return res.status(400).json({ success: false, err: err });
+			userData.role = 'common';
+			User.create(userData, function (err, user) {
+				if (err) return res.json(err);
+				else {
+					req.login(user, function (err) {
+						if (err) { return next(err); }
+						return res.json(user.mapUser())
 					});
-				});
+				}
+			});
 
+		},
 
-			}).catch(function (err) {
-				return res.status(400).json({ success: false, err: err });
+		logout: function (req, res) {
+			req.logout(req.user, function (err) {
+				if (err) { return next(err); }
+				return res.json({ message: "You've been logged out" })
 			});
 		},
 
+		sign_in: function (req, res) {
+			if (req.user.role == 'admin') {
+				return res.json(req.user.mapUser())
+			} else {
+				return res.json({ message: 'You are not authenticated' })
+			}
+		},
+
 		login: function (req, res) {
-
-			var userData = req.body;
-			User.find({ where: { email: userData.email } }).then(function (userFound) {
-				User.findAll({ where: { token: { [Op.ne]: null } }, attributes: ['token'] }).then(function (tokens) {
-					if (userFound) {
-						bcrypt.compare(userData.password, userFound.password, function (err, result) {
-							if (result) {
-								var token = uidgen.generateSync();
-
-								while (tokens.some(e => e.token === token)) {
-									token = uidgen.generateSync();
-								}
-								User.update({ token: token }, { where: userFound.dataValues }).then(function (result) {
-									console.log(result)
-									if (result[0] > 0) {
-										var user_email = req.body.email;
-										User.find({ where: { email: user_email } }).then(function (userDB) {
-
-											return res.json({ success: true, token: token, user: userDB });
-										})
-									} else {
-										return res.status(400).json({ success: false });
-									}
-								}).catch(function (err) {
-									return res.status(400).json({ success: false, err: err });
-								});
-							} else {
-								return res.status(400).json({ message: "Incorrect password" });
-							}
-						});
-					} else {
-						return res.status(400).json({ message: "User not found" });
-
-					}
-				});
-			});
-
+			return res.json(req.user.mapUser())
 		},
 
 		changePassword: function (req, res) {

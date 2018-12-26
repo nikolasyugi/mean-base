@@ -10,7 +10,7 @@ module.exports = function (middlewares, moduleTest){
     		controllers.test.get(req, res);
 		});
 		
-    	router.get("/testAuth", auth.checkToken, function(req, res){
+    	router.get("/testAuth", auth.local, function(req, res){
     		controllers.test.get(req, res);
     	});
   	}

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EmailValidator } from '@angular/forms';
 
 let httpOptions;
 
@@ -20,12 +21,32 @@ export class RequestsService {
 		private http: HttpClient
 	) { }
 
-	teste(): any {
+	sign_in(email, password): any {
 		httpOptions = {
 			headers: new HttpHeaders(this.headers),
 			withCredentials: true
 		}
-		return this.http.get<any>(this.apiUrl + '/user', httpOptions)
+		let body = {
+			email: email,
+			password: password
+		}
+		return this.http.post<any>(this.apiUrl + '/sign_in', body, httpOptions)
+	}
+
+	logout(): any {
+		httpOptions = {
+			headers: new HttpHeaders(this.headers),
+			withCredentials: true
+		}
+		return this.http.post<any>(this.apiUrl + '/logout', httpOptions)
+	}
+
+	getUsers(): any {
+		httpOptions = {
+			headers: new HttpHeaders(this.headers),
+			withCredentials: true
+		}
+		return this.http.get<any>(this.apiUrl + '/users', httpOptions)
 	}
 
 	getBanners(): any {
