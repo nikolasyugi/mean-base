@@ -5,14 +5,15 @@
 		<h5 class="pageTitle">Super usuários</h5>
 		<p class="pageSubtitle">Crie, edite ou remova</p>
 	</div>
-	<div class="datatableWrapper">
+	<div class="contentWrapper">
 		<div class="table-header">
 			<div class="row">
 				<div class="col-lg-8">
-					<h5 class="pageTitle">Lista de Super usuários</h5>
+					<h5 class="contentTitle">Lista de Super usuários</h5>
 				</div>
 				<div class="col-lg-4 text-right">
-					<button class="btn-secondary-fill"><i class="fas fa-plus"></i>Adicionar super usuário</button>
+					<button class="btn-secondary-fill" routerLink="/users/super_users/create"><i class="fas fa-plus"></i>Adicionar
+						Super usuário</button>
 				</div>
 			</div>
 		</div>
@@ -32,9 +33,7 @@
 						<td><button class="options-btn" (click)="user.optionsOpened = !user.optionsOpened">Opções<i class="fas fa-chevron-down"></i></button>
 							<div class="options-dropdown" [hidden]="!user.optionsOpened">
 								<ul>
-									<li>Detalhes</li>
-									<li>Editar</li>
-									<li>Remover</li>
+									<li (click)="openDelete(user)">Remover</li>
 								</ul>
 							</div>
 						</td>

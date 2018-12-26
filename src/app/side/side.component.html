@@ -12,11 +12,11 @@
 		</div>
 		<div id="dropdown-login" [hidden]="!dropdownOpen">
 			<ul>
-				<li>
+				<li routerLink="/edit-password" (click)="dropdownOpen = false">
 					<i class="fas fa-lock"></i>
 					<span>Alterar senha</span>
 				</li>
-				<li style="border:none;">
+				<li style="border:none;" (click)="openLogout()">
 					<i class="fas fa-sign-out-alt"></i>
 					<span>Sair</span>
 				</li>

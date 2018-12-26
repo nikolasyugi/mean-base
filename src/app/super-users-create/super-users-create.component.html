@@ -2,10 +2,10 @@
 
 <section class="pageWrapper" [hidden]="loading">
 	<div class="pageHeader">
-		<h5 class="pageTitle">Usuários</h5>
+		<h5 class="pageTitle">Super usuários</h5>
 	</div>
 	<div class="contentWrapper">
-		<p class="contentTitle">Adicionar usuário</p>
+		<p class="contentTitle">Adicionar Super usuário</p>
 		<form id="login-box">
 			<p class="box-label">Nome</p>
 			<label class="inputWrapper" style="margin-top:0px;">
@@ -24,8 +24,8 @@
 				<input type="password" name="confirm_password" [(ngModel)]="confirm_password" placeholder="Confirme sua senha">
 			</label>
 			<div class="submitWrapper text-right">
-				<button type="submit" routerLink="/users/common" *ngIf="!loading_submit" class="btn-primary-fill" (click)="createUser()">
-					Adicionar usuário
+				<button type="submit" routerLink="/users/common" *ngIf="!loading_submit" class="btn-primary-fill" (click)="createSuperUser()">
+					Adicionar super usuário
 				</button>
 				<button class="btn-primary-fill" *ngIf="loading_submit"><i class="fas fa-spinner fa-spin "></i></button>
 			</div>

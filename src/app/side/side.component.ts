@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
 	selector: 'app-side',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideComponent implements OnInit {
 
-	constructor() { }
+	constructor(
+		private app: AppComponent
+	) { }
 
 	ngOnInit() {
 		if (location.pathname.split('/').length > 2) {
@@ -18,6 +21,11 @@ export class SideComponent implements OnInit {
 		});
 	}
 
+	openLogout() {
+		this.dropdownOpen = false;
+		this.app.openGenericModal('Tem certeza que deseja sair?', 'Atenção!', 'logout');
+	}
+	
 	closeAll() {
 		this.userClicked = false;
 	}

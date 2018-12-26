@@ -7,6 +7,8 @@ import { UsersComponent } from './users/users.component';
 import { SuperUsersComponent } from './super-users/super-users.component';
 import { UsersCreateComponent } from './users-create/users-create.component';
 import { UsersUpdateComponent } from './users-update/users-update.component';
+import { SuperUsersCreateComponent } from './super-users-create/super-users-create.component';
+import { EditPasswordComponent } from './edit-password/edit-password.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,11 @@ const routes: Routes = [
 	{
 		path: 'home',
 		component: HomeComponent,
+		canActivate: []
+	},
+	{
+		path: 'edit-password',
+		component: EditPasswordComponent,
 		canActivate: []
 	},
 	{
@@ -38,6 +45,11 @@ const routes: Routes = [
 	{
 		path: 'users/super_users',
 		component: SuperUsersComponent,
+		canActivate: []
+	},
+	{
+		path: 'users/super_users/create',
+		component: SuperUsersCreateComponent,
 		canActivate: []
 	}
 ];

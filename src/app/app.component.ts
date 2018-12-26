@@ -71,6 +71,10 @@ export class AppComponent {
 			this.modalRef.hide();
 			this.openGenericModal('Usuário removido com sucesso!', 'Parabéns!', 'simple')
 			window.location.reload(true);
+		} else if (name == 'super-user') { //remove super-user
+			this.modalRef.hide();
+			this.openGenericModal('Super usuário removido com sucesso!', 'Parabéns!', 'simple')
+			window.location.reload(true);
 		}
 	}
 
@@ -79,4 +83,7 @@ export class AppComponent {
 		return re.test(String(email).toLowerCase());
 	}
 
+	logOut() {
+		this.router.navigate(['/']);
+	}
 }

@@ -1,14 +1,14 @@
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RequestsService } from '../requests.service';
 import { Subject } from 'rxjs';
+import { AppComponent } from '../app.component';
 
 @Component({
 	selector: 'app-super-users',
 	templateUrl: './super-users.component.html',
 	styleUrls: ['./super-users.component.css']
 })
-
-
 
 export class SuperUsersComponent implements OnDestroy, OnInit {
 
@@ -18,12 +18,13 @@ export class SuperUsersComponent implements OnDestroy, OnInit {
 
 
 	constructor(
-		private requests: RequestsService
+		private requests: RequestsService,
+		private app: AppComponent
 	) { }
 
 	ngOnInit(): void {
-		this.loading = true;
 		window.scrollTo(0, 0);
+		this.loading = true;
 		this.getUsers();
 		this.dtOptions = {
 			pagingType: 'full_numbers',
@@ -51,5 +52,10 @@ export class SuperUsersComponent implements OnDestroy, OnInit {
 	}
 	ngOnDestroy(): void {
 		this.dtTrigger.unsubscribe();
+	}
+
+	openDelete(user) {
+		user.optionsOpened = false;
+		this.app.openRemoveModal('Tem certeza que deseja remover este super usuário?', 'Atenção', 'super-user');
 	}
 }
