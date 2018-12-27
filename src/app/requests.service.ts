@@ -21,26 +21,6 @@ export class RequestsService {
 		private http: HttpClient
 	) { }
 
-	sign_in(email, password): any {
-		httpOptions = {
-			headers: new HttpHeaders(this.headers),
-			withCredentials: true
-		}
-		let body = {
-			email: email,
-			password: password
-		}
-		return this.http.post<any>(this.apiUrl + '/sign_in', body, httpOptions)
-	}
-
-	logout(): any {
-		httpOptions = {
-			headers: new HttpHeaders(this.headers),
-			withCredentials: true
-		}
-		return this.http.post<any>(this.apiUrl + '/logout', httpOptions)
-	}
-
 	getUsers(): any {
 		httpOptions = {
 			headers: new HttpHeaders(this.headers),

@@ -21,73 +21,24 @@ export class UserService {
 		private http: HttpClient,
 	) { }
 
-	signUp(user): any {
+	sign_in(email, password): any {
 		httpOptions = {
-			headers: new HttpHeaders({
-				'Content-Type': this.contenttype,
-				'Language': 'PT',
-				'Access-Control-Allow-Origin': '*',
-				'withCredentials': 'true'
-			}),
-			withCredentials: true
-		}
-		return this.http.post<any>(this.apiUrl + '/login/signup', user, httpOptions)
-	}
-
-	signIn(user): any {
-		httpOptions = {
-			headers: new HttpHeaders({
-				'Content-Type': this.contenttype,
-				'Language': 'PT',
-				'Access-Control-Allow-Origin': '*',
-				'withCredentials': 'true'
-			}),
-			withCredentials: true
-		}
-		return this.http.post<any>(this.apiUrl + '/login/signin', user, httpOptions)
-	}
-
-	signOut() {
-		httpOptions = {
-			headers: new HttpHeaders({
-				'Content-Type': this.contenttype,
-				'Language': 'PT',
-				'Access-Control-Allow-Origin': '*',
-				'withCredentials': 'true'
-			}),
-			withCredentials: true
-		}
-		return this.http.get<any>(this.apiUrl + '/login/logout', httpOptions)
-	}
-
-	forgotPassword(email): any {
-		httpOptions = {
-			headers: new HttpHeaders({
-				'Content-Type': this.contenttype,
-				'Language': 'PT',
-				'Access-Control-Allow-Origin': '*',
-				'withCredentials': 'true'
-			}),
+			headers: new HttpHeaders(this.headers),
 			withCredentials: true
 		}
 		let body = {
-			email: email
+			email: email,
+			password: password
 		}
-		console.log(body)
-		return this.http.post<any>(this.apiUrl + '/login/forgotPass', body, httpOptions)
+		return this.http.post<any>(this.apiUrl + '/sign_in', body, httpOptions)
 	}
 
-	uploadPhoto(fd): any {
+	logout(): any {
 		httpOptions = {
-			headers: new HttpHeaders({
-				//'Content-Type': this.contenttype,
-				'Language': 'PT',
-				'Access-Control-Allow-Origin': '*',
-				'withCredentials': 'true'
-			}),
+			headers: new HttpHeaders(this.headers),
 			withCredentials: true
 		}
-
-		return this.http.post<any>(this.apiUrl + '/account/updatePhoto', fd, httpOptions)
+		return this.http.post<any>(this.apiUrl + '/logout', httpOptions)
 	}
+
 }

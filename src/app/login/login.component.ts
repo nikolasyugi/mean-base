@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestsService } from '../requests.service';
+import { UserService } from '../user.service';
 
 @Component({
 	selector: 'app-login',
@@ -9,7 +10,8 @@ import { RequestsService } from '../requests.service';
 export class LoginComponent implements OnInit {
 
 	constructor(
-		private requests: RequestsService
+		private requests: RequestsService,
+		private userService: UserService
 	) { }
 
 	ngOnInit() {
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
 	user;
 	login() {
 		this.loading = true;
-		this.requests.sign_in(this.email, this.password).subscribe(
+		this.userService.sign_in(this.email, this.password).subscribe(
 			response => {
 				this.user = response;
 				localStorage.setItem('user', JSON.stringify(this.user));

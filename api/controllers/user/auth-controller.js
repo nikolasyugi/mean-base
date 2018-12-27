@@ -20,10 +20,12 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 		},
 
 		logout: function (req, res) {
-			req.logout(req.user, function (err) {
-				if (err) { return next(err); }
-				return res.json({ message: "You've been logged out" })
-			});
+			req.logout()
+			return res.json({ message: "You've been logged out" })
+		},
+
+		isLogged: function (req, res) {
+			return res.status(200).json({})
 		},
 
 		sign_in: function (req, res) {
@@ -45,8 +47,9 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 			var password = req.body.password;
 			bcrypt.hash(password, 10).then(hash => {
 				password = hash;
-				User.update({ password: password }, { where: { email: user.email } }).then(function (userDB) {
-					return res.json({ success: true, message: 'Password Changed' });
+				User.findOneAndUpdate({ _id: user._id }, { password: password }, function (err) {
+					if (err) return res.json({ err: err })
+					return res.json({ message: 'Password Changed' });
 				})
 			});
 		},
