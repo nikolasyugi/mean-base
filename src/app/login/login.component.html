@@ -10,7 +10,7 @@
 					<input type="password" name="password" [(ngModel)]="password" placeholder="SENHA">
 				</label>
 				<a>
-					<button type="submit" routerLink="/home" *ngIf="!loading" class="btn-primary-fill" (click)="login()">
+					<button type="submit" *ngIf="!loading" class="btn-primary-fill" (click)="login()">
 						Entrar
 					</button>
 					<button class="btn-primary-fill" *ngIf="loading"><i class="fas fa-spinner fa-spin "></i></button>

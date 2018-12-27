@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestsService } from '../requests.service';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
@@ -10,12 +10,13 @@ import { UserService } from '../user.service';
 export class LoginComponent implements OnInit {
 
 	constructor(
-		private requests: RequestsService,
-		private userService: UserService
+		private userService: UserService,
+		private router: Router
 	) { }
 
 	ngOnInit() {
 		window.scrollTo(0, 0);
+		localStorage.clear();
 	}
 
 	loading = false;
@@ -27,13 +28,14 @@ export class LoginComponent implements OnInit {
 		this.userService.sign_in(this.email, this.password).subscribe(
 			response => {
 				this.user = response;
-				localStorage.setItem('user', JSON.stringify(this.user));
 			},
 			err => {
 				console.log(err)
 				this.loading = false;
 			},
 			() => {
+				localStorage.setItem('user', JSON.stringify(this.user));
+				this.router.navigate(['/home'])
 				this.loading = false;
 			}
 		)
