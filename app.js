@@ -19,7 +19,7 @@ app.use(modules.bodyParser.json());
 
 
 app.use(session({
-    secret: keys.sessionSecret,
+    secret: require('crypto').randomBytes(64).toString('hex'),
     resave: true,
     saveUninitialized: true
 }));

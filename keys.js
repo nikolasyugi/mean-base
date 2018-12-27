@@ -10,7 +10,6 @@ module.exports = function () {
 		},
 		dbUrl: process.env.MONGODB_DATABASE_URL,
 		googleApiKey: process.env.GOOGLE_API_KEY,
-		sessionSecret: process.env.SESSION_SECRET
 	}
 
 	return keys;
