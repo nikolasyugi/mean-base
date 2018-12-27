@@ -32,6 +32,7 @@ passport.deserializeUser(function (userId, done) {
     schemas.User.findById(userId, (err, user) => done(err, user));
 });
 
+var passportSetup = require('./api/local-strategy')(schemas, modules.passport)
 
 app.use(helmet());
 
