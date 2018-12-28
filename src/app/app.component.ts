@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { RequestsService } from './requests.service';
 import { UserService } from './user.service';
 
@@ -9,7 +9,7 @@ import { UserService } from './user.service';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	@ViewChild('genericModal') genericModal: ElementRef;
 	@ViewChild('removeModal') removeModal: ElementRef;
 
@@ -17,10 +17,22 @@ export class AppComponent {
 		private modalService: BsModalService,
 		private router: Router,
 		private requests: RequestsService,
-		private userService: UserService,
-		private activatedRoute: ActivatedRoute,
+		private userService: UserService
 	) { }
 
+
+	ngOnInit() {
+		this.router.routeReuseStrategy.shouldReuseRoute = function () {
+			return false;
+		};
+
+		this.router.events.subscribe((evt) => {
+			if (evt instanceof NavigationEnd) {
+				this.router.navigated = false;
+				window.scrollTo(0, 0);
+			}
+		});
+	}
 
 	modalRef: BsModalRef;
 	openModal(template) {
@@ -54,33 +66,6 @@ export class AppComponent {
 		this.name = name;
 		this.openModal(this.genericModal);
 
-	}
-
-	pRemove = "";
-	hRemove = "";
-	nameRemove = "";
-	openRemoveModal(paragraph, header, name) {
-		this.pRemove = paragraph;
-		this.hRemove = header;
-		this.nameRemove = name;
-		this.openModal(this.removeModal);
-	}
-
-	remove(name) {
-		if (name == 'user') { //remove user
-			this.modalRef.hide();
-			this.openGenericModal('Usuário removido com sucesso!', 'Parabéns!', 'simple')
-			window.location.reload(true);
-		} else if (name == 'super-user') { //remove super-user
-			this.modalRef.hide();
-			this.openGenericModal('Super usuário removido com sucesso!', 'Parabéns!', 'simple')
-			window.location.reload(true);
-		}
-	}
-
-	validateEmail(email) {
-		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return re.test(String(email).toLowerCase());
 	}
 
 	logOut() {

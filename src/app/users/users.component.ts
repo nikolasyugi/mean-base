@@ -1,14 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RequestsService } from '../requests.service';
 import { Subject } from 'rxjs';
 import { AppComponent } from '../app.component';
-
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 @Component({
 	selector: 'app-users',
 	templateUrl: './users.component.html',
 	styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnDestroy, OnInit {
+
+	@ViewChild('removeModal') removeModal: ElementRef
+
 
 	dtOptions: DataTables.Settings = {};
 	dtTrigger: Subject<any> = new Subject();
@@ -17,8 +21,15 @@ export class UsersComponent implements OnDestroy, OnInit {
 
 	constructor(
 		private requests: RequestsService,
+		private modalService: BsModalService,
+		private router: Router,
 		private app: AppComponent
 	) { }
+
+	modalRef: BsModalRef;
+	openModal(template) {
+		this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+	}
 
 	ngOnInit(): void {
 		window.scrollTo(0, 0);
@@ -52,8 +63,26 @@ export class UsersComponent implements OnDestroy, OnInit {
 		this.dtTrigger.unsubscribe();
 	}
 
-	openDelete(user) {
+	deleteId: string;
+	openDelete(user, id) {
 		user.optionsOpened = false;
-		this.app.openRemoveModal('Tem certeza que deseja remover este usuário?', 'Atenção', 'user');
+		this.deleteId = id;
+		this.openModal(this.removeModal);
+	}
+
+	deleteUser() {
+		this.requests.deleteUser(this.deleteId).subscribe(
+			response => {
+			},
+			err => {
+				if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+				else console.log(err)
+			},
+			() => {
+				this.router.navigate(['/users/common'])
+				this.modalRef.hide();
+				this.app.openGenericModal('Usuário removido com sucesso!', 'Parabéns!', 'simple')
+			}
+		)
 	}
 }

@@ -19,10 +19,11 @@ export class UsersUpdateComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.loading = false;
+		this.loading = true;
 		window.scrollTo(0, 0)
 		if (this.location.path().split('/users/common/update/')[1]) {
 			this.id = this.location.path().split('/users/common/update/')[1]
+			this.getUser();
 		} else {
 			this.router.navigate(['/users/common'])
 		}
@@ -30,14 +31,39 @@ export class UsersUpdateComponent implements OnInit {
 
 	loading: boolean;
 	loading_submit: boolean;
-	name: string;
-	email: string;
-	password: string;
-	confirm_password: string;
 	id: string;
+	user: any;
 
+	getUser() {
+		this.requests.getUser(this.id).subscribe(
+			response => {
+				this.user = response;
+			},
+			err => {
+				console.log(err)
+			},
+			() => {
+				setTimeout(() => {
+					this.loading = false
+				}, 1000);
+			}
+		)
+	}
 	updateUser() {
-		this.app.openGenericModal('Usuário alterado com sucesso!', 'Parabéns!', 'simple')
-		this.loading_submit = false;
+		this.loading_submit = true;
+
+		this.requests.updateUser(this.id, this.user).subscribe(
+			response => {
+			},
+			err => {
+				if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+				else console.log(err)
+			},
+			() => {
+				this.router.navigate(['/users/common'])
+				this.loading_submit = false;
+				this.app.openGenericModal('Usuário alterado com sucesso!', 'Parabéns!', 'simple')
+			}
+		)
 	}
 }

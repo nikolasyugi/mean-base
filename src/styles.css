@@ -280,12 +280,6 @@ table.dataTable tr:nth-child(even), table.dataTable tr {
     margin: 30px 0 0 0;
 }
 
-.no-btn {
-    background: var(--primary);
-    color: white;
-    margin-left: 30px;
-}
-
 @media only screen and (max-width:991px) {
     .no-btn {
         margin-top: 15px !important;
@@ -324,6 +318,22 @@ table.dataTable tr:nth-child(even), table.dataTable tr {
 
 .modal-form p {
     padding: 25px;
+}
+
+.modal-form input {
+    width: 70%;
+    margin: 0 auto 20px;
+    display: block;
+    padding: 10px;
+    font-weight: 700;
+}
+
+.modal-form i {
+    color: white;
+}
+
+.modal-form img {
+    padding-bottom: 20px;
 }
 
 /* MODALS */

@@ -1,6 +1,6 @@
-<div class="loading" [hidden]="!loading"><i class="fas fa-spinner fa-spin fa-4x"></i></div>
+<div class="loading" *ngIf="loading"><i class="fas fa-spinner fa-spin fa-4x"></i></div>
 
-<section class="pageWrapper" [hidden]="loading">
+<section class="pageWrapper" *ngIf="!loading">
 	<div class="pageHeader">
 		<h5 class="pageTitle">Usuários</h5>
 	</div>
@@ -9,19 +9,7 @@
 		<form id="login-box">
 			<p class="box-label">Nome</p>
 			<label class="inputWrapper" style="margin-top:0px;">
-				<input type="text" name="name" [(ngModel)]="name" placeholder="Nome">
-			</label>
-			<p class="box-label">E-mail</p>
-			<label class="inputWrapper">
-				<input type="email" name="email" [(ngModel)]="email" placeholder="E-mail">
-			</label>
-			<p class="box-label">Senha</p>
-			<label class="inputWrapper">
-				<input type="password" name="password" [(ngModel)]="password" placeholder="Senha">
-			</label>
-			<p class="box-label">Confirmar senha</p>
-			<label class="inputWrapper">
-				<input type="password" name="confirm_password" [(ngModel)]="confirm_password" placeholder="Confirme sua senha">
+				<input type="text" name="name" [(ngModel)]="user.name" placeholder="Nome">
 			</label>
 			<div class="submitWrapper text-right">
 				<button type="submit" routerLink="/users/common" *ngIf="!loading_submit" class="btn-primary-fill" (click)="updateUser()">

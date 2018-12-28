@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { RequestsService } from '../requests.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-super-users-create',
@@ -11,15 +12,14 @@ export class SuperUsersCreateComponent implements OnInit {
 
 	constructor(
 		private app: AppComponent,
-		private requests: RequestsService
+		private requests: RequestsService,
+		private router: Router
 	) { }
 
 	ngOnInit() {
 		window.scrollTo(0, 0);
-		this.loading = false;
 	}
 
-	loading: boolean;
 	loading_submit: boolean;
 	name: string;
 	email: string;
@@ -27,7 +27,25 @@ export class SuperUsersCreateComponent implements OnInit {
 	confirm_password: string;
 
 	createSuperUser() {
-		this.app.openGenericModal('Super usuário criado com sucesso!', 'Parabéns!', 'simple')
-		this.loading_submit = false;
+		this.loading_submit = true;
+		let user = {
+			name: this.name,
+			email: this.email,
+			password: this.password,
+			confirm_password: this.password
+		}
+		this.requests.createSuperUser(user).subscribe(
+			response => {
+			},
+			err => {
+				if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+				else console.log(err)
+			},
+			() => {
+				this.router.navigate(['/users/super_users'])
+				this.loading_submit = false;
+				this.app.openGenericModal('Super usuário criado com sucesso!', 'Parabéns!', 'simple')
+			}
+		)
 	}
 }

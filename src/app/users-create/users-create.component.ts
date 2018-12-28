@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { RequestsService } from '../requests.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-users-create',
@@ -11,15 +12,14 @@ export class UsersCreateComponent implements OnInit {
 
 	constructor(
 		private app: AppComponent,
-		private requests: RequestsService
+		private requests: RequestsService,
+		private router: Router
 	) { }
 
 	ngOnInit() {
 		window.scrollTo(0, 0);
-		this.loading = false;
 	}
 
-	loading: boolean;
 	loading_submit: boolean;
 	name: string;
 	email: string;
@@ -27,7 +27,25 @@ export class UsersCreateComponent implements OnInit {
 	confirm_password: string;
 
 	createUser() {
-		this.app.openGenericModal('Usuário criado com sucesso!', 'Parabéns!', 'simple')
-		this.loading_submit = false;
+		this.loading_submit = true;
+		let user = {
+			name: this.name,
+			email: this.email,
+			password: this.password,
+			confirm_password: this.password
+		}
+		this.requests.createUser(user).subscribe(
+			response => {
+			},
+			err => {
+				if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+				else console.log(err)
+			},
+			() => {
+				this.router.navigate(['/users/common'])
+				this.loading_submit = false;
+				this.app.openGenericModal('Usuário criado com sucesso!', 'Parabéns!', 'simple')
+			}
+		)
 	}
 }
