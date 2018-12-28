@@ -15,8 +15,8 @@ module.exports = function (schemas, passport) {
 			}
 			User.findOne({ email: username }, function (err, userFound) {
 				if (err) { return done(err); }
-				if (!userFound) { return done(null, false, { message: "User not found" }); }
-				if (!userFound.verifyPassword(password)) { return done(null, false, {message: "Invalid password"}); }
+				if (!userFound) { return done(null, false, { err: "User not found" }); }
+				if (!userFound.verifyPassword(password)) { return done(null, false, {err: "Invalid password"}); }
 				return done(null, userFound);
 			})
 		}

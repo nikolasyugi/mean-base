@@ -24,15 +24,11 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 			return res.json({ message: "You've been logged out" })
 		},
 
-		isLogged: function (req, res) {
-			return res.status(200).json({})
-		},
-
 		sign_in: function (req, res) {
 			if (req.user.role == 'admin') {
 				return res.json(req.user.mapUser())
 			} else {
-				return res.json({ message: 'You are not authenticated' })
+				return res.json({ err: 'You are not authenticated' })
 			}
 		},
 
@@ -43,15 +39,35 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 		changePassword: function (req, res) {
 
 			var user = res.locals.user;
-
+			var oldPassword = req.body.oldPassword;
 			var password = req.body.password;
-			bcrypt.hash(password, 10).then(hash => {
-				password = hash;
-				User.findOneAndUpdate({ _id: user._id }, { password: password }, function (err) {
-					if (err) return res.json({ err: err })
-					return res.json({ message: 'Password Changed' });
-				})
-			});
+			var confirm_password = req.body.confirm_password;
+
+			if (oldPassword != password) {
+				if (password.length >= 8) {
+					if (confirm_password == password) {
+						if (bcrypt.compareSync(oldPassword, req.user.password)) {
+
+
+							bcrypt.hash(password, 10).then(hash => {
+								password = hash;
+								User.findOneAndUpdate({ _id: user._id }, { password: password }, function (err) {
+									if (err) return res.json({ err: err })
+									return res.json({ message: 'Password Changed' });
+								})
+							});
+						} else {
+							return res.status(400).json({ err: 'Old password is incorrect' })
+						}
+					} else {
+						return res.status(400).json({ err: 'Password and passowrd confirmation are different' })
+					}
+				} else {
+					return res.status(400).json({ err: 'Password length must be greater than 8' })
+				}
+			} else {
+				return res.status(400).json({ err: 'New and old password are the same' })
+			}
 		},
 
 		resetPassword: function (req, res) {
@@ -103,7 +119,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 					})
 				}
 				else {
-					return res.status(404).json({ success: false, message: 'User not found!' });
+					return res.status(404).json({ err:  'User not found!' });
 				}
 			});
 		}

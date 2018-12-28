@@ -41,4 +41,11 @@ export class UserService {
 		return this.http.post<any>(this.apiUrl + '/logout', httpOptions)
 	}
 
+	changePassword(body): any {
+		httpOptions = {
+			headers: new HttpHeaders(this.headers),
+			withCredentials: true
+		}
+		return this.http.put<any>(this.apiUrl + '/changePassword', body, httpOptions)
+	}
 }

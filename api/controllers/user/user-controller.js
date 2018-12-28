@@ -3,43 +3,129 @@ module.exports = function (schemas) {
 	var User = schemas.User;
 
 	return {
-		get: function (req, res) {
+		getSuperUsers: function (req, res) {
 
-			// var user = new User({
-			// 	name: 'Chriss',
-			// 	username: 'sevilayha',
-			// 	email: 'a@aasdasdasdasdasdsaszzzsz.com',
-			// 	password: 'password'
-			// });
-
-			// user.save(function(err) {
-			// 	if (err) throw err;
-
-			// 	console.log('User saved successfully!');
-			// 	var user = res.locals.user;
-			// });
-			User.find({}, function (err, users) {
+			User.find({ role: "admin" }, function (err, users) {
 				if (err) throw err;
-				else res.send(users);
+				else {
+					array = []
+					users.forEach(u => {
+						array.push(u.mapUser())
+					});
+					res.json(array);
+				}
 			});
-
-
-
 		},
 
-		put: function (req, res) {
+		getSuperUser: function (req, res) {
 
-			var user = res.locals.user;
-
-			var body = req.body;
-
-			User.update(body, { where: { email: user.email } }).then(function (userDB) {
-				return res.json({ success: true, message: 'Dados alterados com sucesso!' });
-			}).catch(function (err) {
-				return res.status(400).json({ success: false, err: err });
+			User.findOne({ role: "admin", _id: req.params.id }, function (err, user) {
+				if (err) throw err;
+				else {
+					if (!user) return res.status(404).json({ err: "User not found" })
+					else res.json(user.mapUser())
+				}
 			});
+		},
 
-		}
+		createSuperUser: function (req, res) {
+			var u = new User({
+				name: req.body.name,
+				email: req.body.email,
+				password: req.body.password,
+				role: 'admin'
+			})
+
+			u.save(function (err, user) {
+				if (err) throw err;
+				else res.send(user.mapUser());
+			});
+		},
+
+		updateSuperUser: function (req, res) {
+
+			User.findOne({ role: "admin", _id: req.params.id }, function (err, user) {
+				if (err) throw err;
+				else {
+					if (!user) return res.status(404).json({ err: "User not found" })
+					else user.name = req.body.name;
+					user.save(function (err, userUpdated) {
+						if (err) throw err;
+						else return res.json(userUpdated.mapUser());
+					});
+				}
+			});
+		},
+
+		deleteSuperUser: function (req, res) {
+
+			User.findOneAndDelete({ role: "admin", _id: req.params.id }, function (err) {
+				if (err) throw err;
+				else return res.json({});
+			});
+		},
+
+		getUsers: function (req, res) {
+
+			User.find({ role: { $ne: "admin" } }, function (err, users) {
+				if (err) throw err;
+				else {
+					array = []
+					users.forEach(u => {
+						array.push(u.mapUser())
+					});
+					res.json(array);
+				}
+			});
+		},
+
+		getUser: function (req, res) {
+
+			User.findOne({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
+				if (err) throw err;
+				else {
+					if (!user) return res.status(404).json({ err: "User not found" })
+					else res.json(user.mapUser());
+				}
+			});
+		},
+
+		createUser: function (req, res) {
+
+			var u = new User({
+				name: req.body.name,
+				email: req.body.email,
+				password: req.body.password,
+				role: 'common'
+			})
+
+			u.save(function (err, user) {
+				if (err) throw err;
+				else res.send(user.mapUser());
+			});
+		},
+
+		updateUser: function (req, res) {
+			User.findOne({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
+				if (err) throw err;
+				else {
+					if (!user) return res.status(404).json({ err: "User not found" })
+					else user.name = req.body.name;
+					user.save(function (err, userUpdated) {
+						if (err) throw err;
+						else res.send(userUpdated.mapUser());
+					});
+				}
+			});
+		},
+
+		deleteUser: function (req, res) {
+
+			User.findOneAndDelete({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
+				if (err) throw err;
+				else res.send({});
+			});
+		},
 
 	}
 }

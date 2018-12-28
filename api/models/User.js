@@ -56,6 +56,7 @@ module.exports = function (mongoose, bcrypt) {
 
 	userSchema.methods.mapUser = function () {
 		return {
+			id: this.id,
 			name: this.name,
 			email: this.email
 		};

@@ -27,6 +27,7 @@ export class SideComponent implements OnInit {
 	user: any;
 	openLogout() {
 		this.dropdownOpen = false;
+		this.mobileOpen = false;
 		this.app.openGenericModal('Tem certeza que deseja sair?', 'Atenção!', 'logout');
 	}
 

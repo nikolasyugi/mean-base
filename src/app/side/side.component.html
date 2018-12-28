@@ -12,7 +12,7 @@
 		</div>
 		<div id="dropdown-login" [hidden]="!dropdownOpen">
 			<ul>
-				<li routerLink="/edit-password" (click)="dropdownOpen = false">
+				<li routerLink="/edit-password" (click)="dropdownOpen = false; mobileOpen = false;">
 					<i class="fas fa-lock"></i>
 					<span>Alterar senha</span>
 				</li>

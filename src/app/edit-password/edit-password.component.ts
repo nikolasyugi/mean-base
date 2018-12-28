@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
-import { RequestsService } from '../requests.service';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-edit-password',
@@ -10,7 +11,8 @@ import { RequestsService } from '../requests.service';
 export class EditPasswordComponent implements OnInit {
 	constructor(
 		private app: AppComponent,
-		private requests: RequestsService,
+		private userService: UserService,
+		private router: Router
 	) { }
 
 	ngOnInit() {
@@ -20,12 +22,33 @@ export class EditPasswordComponent implements OnInit {
 
 	loading: boolean;
 	loading_submit: boolean;
-	last_password: string;
+	oldPassword: string;
 	password: string;
 	confirm_password: string;
 
 	updatePassword() {
-		this.app.openGenericModal('Senha alterada com sucesso!', 'Parabéns!', 'simple')
-		this.loading_submit = false;
+		if (this.oldPassword && this.password && this.confirm_password) {
+			let body = {
+				oldPassword: this.oldPassword,
+				password: this.password,
+				confirm_password: this.confirm_password
+			}
+			this.userService.changePassword(body).subscribe(
+				response => {
+				},
+				err => {
+					if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+					console.log(err)
+					this.loading_submit = false;
+				},
+				() => {
+					this.router.navigate(['/home']);
+					this.loading_submit = false;
+					this.app.openGenericModal('Senha alterada com sucesso!', 'Parabéns!', 'simple')
+				}
+			)
+		} else {
+			this.app.openGenericModal('Preencha todos os campos', 'Ops!', 'simple')
+		}
 	}
 }
