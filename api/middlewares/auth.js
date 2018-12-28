@@ -17,10 +17,7 @@ module.exports = function (schemas, passport) {
 				res.locals.user = req.user;
 				next();
 			}
-		},
-
-		local:
-			passport.authenticate('local')
+		}
 	}
 
 }

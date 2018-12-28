@@ -24,16 +24,32 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 			return res.json({ message: "You've been logged out" })
 		},
 
-		sign_in: function (req, res) {
-			if (req.user.role == 'admin') {
-				return res.json(req.user.mapUser())
-			} else {
-				return res.json({ err: 'You are not authenticated' })
-			}
+		sign_in: function (req, res, next) {
+			passport.authenticate('local', function (err, user, info) {
+				if (err) { return next(err); }
+				if (!user) { return res.status(400).json(info) }
+				if (user.role == 'admin') {
+					req.login(user, function (err) {
+						if (err) { return next(err); }
+						return res.json(user.mapUser())
+					});
+				} else {
+					return res.status(400).json({ err: 'You are not authorized' })
+				}
+
+			})(req, res, next);
+
 		},
 
-		login: function (req, res) {
-			return res.json(req.user.mapUser())
+		login: function (req, res, next) {
+			passport.authenticate('local', function (err, user, info) {
+				if (err) { return next(err); }
+				if (!user) { return res.status(400).json(info) }
+				req.login(user, function (err) {
+					if (err) { return next(err); }
+					return res.json(user.mapUser())
+				});
+			})(req, res, next);
 		},
 
 		changePassword: function (req, res) {
@@ -119,7 +135,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 					})
 				}
 				else {
-					return res.status(404).json({ err:  'User not found!' });
+					return res.status(404).json({ err: 'User not found!' });
 				}
 			});
 		}

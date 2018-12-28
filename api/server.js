@@ -18,6 +18,8 @@ module.exports = function (keys, modules, schemas, transporter, uidgen) {
 	//Routes
 	var routes = {};
 	routes.routes = require(__basedir + '/api/routes/router.js')(modules.express, routes);
+
+	//Version 1
 	routes.v1 = {};
 	routes.v1.test = require(__basedir + '/api/routes/v1/test.js')(middlewares, test);
 	routes.v1.user = require(__basedir + '/api/routes/v1/user.js')(middlewares, user);

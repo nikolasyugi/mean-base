@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
 	selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private userService: UserService,
-		private router: Router
+		private router: Router,
+		private app: AppComponent
 	) { }
 
 	ngOnInit() {
@@ -30,7 +32,9 @@ export class LoginComponent implements OnInit {
 				this.user = response;
 			},
 			err => {
-				console.log(err)
+				if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+				else if (err.error.message) this.app.openGenericModal(err.error.message, 'Ops!', 'simple')
+				else console.log(err)
 				this.loading = false;
 			},
 			() => {

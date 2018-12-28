@@ -10,12 +10,12 @@ module.exports = function (middlewares, moduleUser) {
             controllers.auth.signup(req, res);
         });
 
-        router.post("/sign_in", auth.local, function (req, res) {
-            controllers.auth.sign_in(req, res);
+        router.post("/sign_in", function (req, res, next) {
+            controllers.auth.sign_in(req, res, next);
         });
 
-        router.post("/login", auth.local, function (req, res) {
-            controllers.auth.login(req, res);
+        router.post("/login", function (req, res, next) {
+            controllers.auth.login(req, res, next);
         });
 
         router.post("/logout", auth.checkLogged, function (req, res) {
