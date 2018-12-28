@@ -16,6 +16,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { Test } from './interceptors/test.interceptor';
 import { Notauth } from './interceptors/notauth.interceptor';
+import { GuardService } from './guard/guard.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -82,6 +83,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 			useClass: Test,
 			multi: true
 		},
+		GuardService
 	],
 	bootstrap: [AppComponent]
 })

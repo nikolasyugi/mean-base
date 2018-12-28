@@ -100,4 +100,12 @@ export class RequestsService {
 		}
 		return this.http.delete<any>(this.apiUrl + '/users/super_users/' + id, httpOptions)
 	}
+
+	isLogged() {
+		httpOptions = {
+			headers: new HttpHeaders(this.headers),
+			withCredentials: true
+		}
+		return this.http.get<any>(this.apiUrl + '/users/isLogged/', httpOptions)
+	}
 }

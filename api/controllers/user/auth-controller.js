@@ -3,6 +3,11 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 	var User = schemas.User;
 	return {
 
+		isLogged: function (req, res) {
+			if (req.user && req.user.role == 'admin') return res.json({ response: true })
+			else return res.json({ response: false })
+		},
+
 		signup: function (req, res) {
 
 			var userData = req.body;

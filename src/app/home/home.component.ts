@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeoutError } from 'rxjs';
 import { UserService } from '../user.service';
 
 @Component({
@@ -11,12 +10,11 @@ export class HomeComponent implements OnInit {
 
 	constructor(
 		private userService: UserService
-	) { }
+		) { }
 
 	ngOnInit() {
 		this.loading = false;
 	}
-
 
 	loading: boolean;
 }

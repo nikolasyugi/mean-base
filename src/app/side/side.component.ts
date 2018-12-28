@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
+import { GuardService } from '../guard/guard.service';
 
 @Component({
 	selector: 'app-side',
@@ -11,10 +12,14 @@ export class SideComponent implements OnInit {
 
 	constructor(
 		private app: AppComponent,
-		private router: Router
+		private router: Router,
+		private auth: GuardService
+
 	) { }
 
 	ngOnInit() {
+		this.auth.canActivate()
+
 		this.user = JSON.parse(localStorage.getItem('user'))
 		if (location.pathname.split('/').length > 2) {
 			this.userClicked = true;

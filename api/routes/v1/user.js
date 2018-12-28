@@ -34,6 +34,10 @@ module.exports = function (middlewares, moduleUser) {
             controllers.auth.confirmPasswordEmail(req, res);
         });
 
+        router.get("/users/isLogged", function (req, res) {
+            controllers.auth.isLogged(req, res);
+        });
+
 
 
 
