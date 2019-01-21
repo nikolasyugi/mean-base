@@ -13,6 +13,7 @@ const mongoose = modules.mongoose;
 const session = require('express-session');
 
 var schemas = require(__basedir + '/api/configSchemas.js')(modules.mongoose, modules.bcrypt);
+var redis = require(__basedir + '/api/redis.js')(modules.redis);
 
 app.use(modules.bodyParser.urlencoded({ extended: false }));
 app.use(modules.bodyParser.json());
@@ -60,7 +61,7 @@ var uidgen = new modules.UIDGenerator();
 
 var transporter = modules.nodemailer.createTransport('smtps://' + keys.configEmail.email + ':' + keys.configEmail.password + '@smtp.gmail.com');
 
-var server = require(__basedir + '/api/server.js')(keys, modules, schemas, transporter, uidgen);
+var server = require(__basedir + '/api/server.js')(keys, modules, schemas, transporter, uidgen, redis);
 
 
 app.use(express.static(__basedir + '/dist/mean-base'));

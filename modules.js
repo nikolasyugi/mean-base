@@ -38,5 +38,8 @@ module.exports = function () {
 	modules.passport = require('passport');
 	modules.passportLocal = require('passport-local');
 
+	// https://www.npmjs.com/package/redis
+	modules.redis = require('redis');
+
 	return modules;
 }

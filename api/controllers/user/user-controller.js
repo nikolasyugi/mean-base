@@ -1,10 +1,10 @@
-module.exports = function (schemas) {
+module.exports = function (schemas, redis) {
 
 	var User = schemas.User;
 
 	return {
 		getSuperUsers: function (req, res) {
-
+			
 			User.find({ role: "admin" }, function (err, users) {
 				if (err) throw err;
 				else {

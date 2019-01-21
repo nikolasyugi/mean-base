@@ -1,4 +1,4 @@
-module.exports = function (keys, modules, schemas, transporter, uidgen) {
+module.exports = function (keys, modules, schemas, transporter, uidgen, redis) {
 
 	//Middlewares
 	var middlewares = {};
