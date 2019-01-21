@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --prod",
-    "dev": "ng build & concurrently --kill-others \"ng serve --proxy-config proxy.conf.json\" \"nodemon app.js\""
+    "dev": "ng build & concurrently --kill-others \"ng serve --proxy-config proxy.conf.json\" \"nodemon app.js\"",
+    "seed": "node ./api/seed.js"
   },
   "private": true,
   "dependencies": {
