@@ -11,6 +11,7 @@ const helmet = modules.helmet;
 const passport = modules.passport;
 const mongoose = modules.mongoose;
 const session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 var schemas = require(__basedir + '/api/configSchemas.js')(modules.mongoose, modules.bcrypt);
 var redis = require(__basedir + '/api/redis.js')(modules.redis);
@@ -18,9 +19,17 @@ var redis = require(__basedir + '/api/redis.js')(modules.redis);
 app.use(modules.bodyParser.urlencoded({ extended: false }));
 app.use(modules.bodyParser.json());
 
+var sessionSecret;
+
+if (process.env.NODE_ENV == 'development') {
+    sessionSecret = "session-cat"
+} else if (process.env.NODE_ENV == 'production') { 
+    sessionSecret = require('crypto').randomBytes(64).toString('hex')
+}
 
 app.use(session({
-    secret: require('crypto').randomBytes(64).toString('hex'),
+    store: new RedisStore({client: redis}),
+    secret:  sessionSecret,
     resave: true,
     saveUninitialized: true
 }));
