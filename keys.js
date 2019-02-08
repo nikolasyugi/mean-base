@@ -8,7 +8,7 @@ module.exports = function () {
 			email: process.env.EMAIL,
 			password: process.env.EMAIL_PASSWORD
 		},
-		dbUrl: process.env.MONGODB_DATABASE_URL,
+		dbUrl: process.env.MONGO_URL,
 		googleApiKey: process.env.GOOGLE_API_KEY,
 	}
 
