@@ -9,6 +9,8 @@ module.exports = function (middlewares, moduleUser, multer) {
 
     return function (router) {
 
+        //Account and Authorization
+
         router.post("/signup", function (req, res) {
             controllers.auth.signup(req, res);
         });
@@ -37,15 +39,11 @@ module.exports = function (middlewares, moduleUser, multer) {
             controllers.auth.confirmPasswordEmail(req, res);
         });
 
-        router.get("/users/isLogged", function (req, res) {
-            controllers.auth.isLogged(req, res);
-        });
 
 
 
 
-
-
+        //Admin panel CRUD
 
         router.get("/users/super_users", auth.checkAdmin, function (req, res) {
             controllers.user.getSuperUsers(req, res);
@@ -88,6 +86,13 @@ module.exports = function (middlewares, moduleUser, multer) {
         });
 
 
+
+
+        //API
+
+        router.get("/user/isLogged", function (req, res) {
+            controllers.auth.isLogged(req, res);
+        });
 
         router.put("/user/picture", auth.checkLogged, upload.single("picture"), function (req, res) {
             controllers.user.updatePicture(req, res);
