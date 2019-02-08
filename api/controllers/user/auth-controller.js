@@ -100,8 +100,8 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 			var mailOptions = {
 				from: '"Contato" <' + keys.configEmail.email + '>',
 				to: email,
-				subject: 'Pedido de nova senha',
-				text: 'Para pedir uma nova senha clique no seguinte link: ' + keys.apiUrl + '/v1/confirm-password-email/' + email_token
+				subject: keys.projectName + ' - Pedido de nova senha',
+				text: 'Para pedir uma nova senha clique no seguinte link: ' + keys.apiUrl + '/api/v1/confirm-password-email/' + email_token
 			};
 
 			User.update({ new_password_token: email_token }, { where: { email: email } }).then(function (userDB) {
@@ -125,7 +125,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
 					var mailOptions = {
 						from: '"Contato" <' + keys.configEmail.email + '>',
 						to: userDB.email,
-						subject: 'Nova Senha',
+						subject: keys.projectName + ' - Nova Senha',
 						text: 'Sua nova senha é ' + senha
 					};
 

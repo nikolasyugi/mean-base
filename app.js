@@ -68,7 +68,31 @@ mongoose.set('useCreateIndex', true);
 
 var uidgen = new modules.UIDGenerator();
 
-var transporter = modules.nodemailer.createTransport('smtps://' + keys.configEmail.email + ':' + keys.configEmail.password + '@smtp.gmail.com');
+const { google } = modules.google;    
+const OAuth2 = google.auth.OAuth2;
+const oauth2Client = new OAuth2(
+    keys.google.clientID,
+    keys.google.clientSecret,
+    "https://developers.google.com/oauthplayground"
+);
+oauth2Client.setCredentials({
+    refresh_token: keys.google.refreshToken
+});
+const accessToken = oauth2Client.refreshAccessToken()
+    .then(res => res.credentials.access_token);
+var transporter = modules.nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        type: "OAuth2",
+        user: keys.configEmail.email,
+        clientId: keys.google.clientID,
+        clientSecret: keys.google.clientSecret,
+        refreshToken: keys.google.refreshToken,
+        accessToken: accessToken
+    }
+});
+
+// var transporter = modules.nodemailer.createTransport('smtps://' + keys.configEmail.email + ':' + keys.configEmail.password + '@smtp.gmail.com');
 
 var server = require(__basedir + '/api/server.js')(keys, modules, schemas, transporter, uidgen, redis);
 
