@@ -104,14 +104,26 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
                 text: 'Para pedir uma nova senha clique no seguinte link: ' + keys.apiUrl + '/api/v1/confirm-password-email/' + email_token
             };
 
-            User.update({ new_password_token: email_token }, { where: { email: email } }).then(function (userDB) {
-                transporter.sendMail(mailOptions, function (error, info) {
-                    if (error) {
-                        return console.log(error);
+            User.findOne({ email: email }), function (err, user) {
+                if (err) throw err;
+                else {
+                    if (!user) return res.status(404).json({ err: "User not found" })
+                    else {
+                        user.new_password_token = email_token;
+                        user.save(function (err, userUpdated) {
+                            if (err) throw err;
+                            else {
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        return console.log(error);
+                                    }
+                                    return res.json({ success: true, message: 'Email sent' });
+                                });
+                            }
+                        });
                     }
-                    return res.json({ success: true, message: 'Email sent' });
-                });
-            });
+                }
+            }
         },
 
         confirmPasswordEmail: function (req, res) {
