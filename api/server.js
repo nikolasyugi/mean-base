@@ -1,4 +1,4 @@
-module.exports = function (keys, modules, schemas, transporter, uidgen, redis) {
+module.exports = function (keys, modules, schemas, transporter, uidgen, redis, multer) {
 
 	//Middlewares
 	var middlewares = {};
@@ -8,7 +8,7 @@ module.exports = function (keys, modules, schemas, transporter, uidgen, redis) {
 	var user = {};
 	user.controllers = {};
 	user.controllers.auth = require(__basedir + '/api/controllers/user/auth-controller.js')(keys, schemas, uidgen, transporter, modules.passport, modules.bcrypt, modules);
-	user.controllers.user = require(__basedir + '/api/controllers/user/user-controller.js')(schemas);
+	user.controllers.user = require(__basedir + '/api/controllers/user/user-controller.js')(schemas, uidgen, keys, modules.aws);
 
 	//Test
 	var test = {};
@@ -22,7 +22,7 @@ module.exports = function (keys, modules, schemas, transporter, uidgen, redis) {
 	//Version 1
 	routes.v1 = {};
 	routes.v1.test = require(__basedir + '/api/routes/v1/test.js')(middlewares, test);
-	routes.v1.user = require(__basedir + '/api/routes/v1/user.js')(middlewares, user);
+	routes.v1.user = require(__basedir + '/api/routes/v1/user.js')(middlewares, user, modules.multer);
 
 	return routes.routes;
 

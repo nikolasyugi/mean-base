@@ -22,6 +22,7 @@ module.exports = function (mongoose, bcrypt) {
 			},
 		},
 		role: String,
+		picture: String,
 		new_password_token: String,
 		created_at: Date,
 		updated_at: Date
@@ -58,7 +59,8 @@ module.exports = function (mongoose, bcrypt) {
 		return {
 			id: this.id,
 			name: this.name,
-			email: this.email
+			email: this.email,
+			picture: this.picture == null? null : this.picture
 		};
 	};
 

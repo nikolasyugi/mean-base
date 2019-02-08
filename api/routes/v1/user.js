@@ -1,8 +1,11 @@
-module.exports = function (middlewares, moduleUser) {
+module.exports = function (middlewares, moduleUser, multer) {
 
     var auth = middlewares.auth;
 
     var controllers = moduleUser.controllers;
+
+    var storage = multer.memoryStorage()
+    var upload = multer({ storage: storage });
 
     return function (router) {
 
@@ -10,11 +13,11 @@ module.exports = function (middlewares, moduleUser) {
             controllers.auth.signup(req, res);
         });
 
-        router.post("/sign_in", function (req, res, next) {
+        router.post("/sign_in", function (req, res, next) { //admin sign in
             controllers.auth.sign_in(req, res, next);
         });
 
-        router.post("/login", function (req, res, next) {
+        router.post("/login", function (req, res, next) { //normal user sign in
             controllers.auth.login(req, res, next);
         });
 
@@ -82,6 +85,16 @@ module.exports = function (middlewares, moduleUser) {
 
         router.delete("/users/:id", auth.checkAdmin, function (req, res) {
             controllers.user.deleteUser(req, res);
+        });
+
+
+
+        router.put("/user/picture", auth.checkLogged, upload.single("picture"), function (req, res) {
+            controllers.user.updatePicture(req, res);
+        });
+
+        router.get("/user/about", auth.checkLogged, function (req, res) {
+            controllers.user.getAbout(req, res);
         });
 
     }

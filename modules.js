@@ -44,5 +44,14 @@ module.exports = function () {
     // https://www.npmjs.com/package/googleapis
     modules.google = require("googleapis");
 
+    // https://www.npmjs.com/package/aws-sdk
+	modules.aws = require('aws-sdk');
+
+	// https://www.npmjs.com/package/async
+	modules.async = require('async');
+
+	// https://www.npmjs.com/package/multer
+	modules.multer = require('multer');
+
     return modules;
 }
