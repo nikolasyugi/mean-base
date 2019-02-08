@@ -7,7 +7,7 @@ module.exports = function (keys, modules, schemas, transporter, uidgen, redis) {
 	//User
 	var user = {};
 	user.controllers = {};
-	user.controllers.auth = require(__basedir + '/api/controllers/user/auth-controller.js')(keys, schemas, uidgen, transporter, modules.passport, modules.bcrypt);
+	user.controllers.auth = require(__basedir + '/api/controllers/user/auth-controller.js')(keys, schemas, uidgen, transporter, modules.passport, modules.bcrypt, modules);
 	user.controllers.user = require(__basedir + '/api/controllers/user/user-controller.js')(schemas);
 
 	//Test

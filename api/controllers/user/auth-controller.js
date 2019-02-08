@@ -1,4 +1,4 @@
-module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt) {
+module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt, modules) {
 
     var User = schemas.User;
     return {
@@ -119,7 +119,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
                                     if (error) {
                                         return console.log(error);
                                     }
-                                    return res.json({ success: true, message: 'Email sent' });
+                                    return res.json({message: 'Email sent' });
                                 });
                             }
                         });
@@ -131,7 +131,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
         confirmPasswordEmail: function (req, res) {
 
             var emailToken = req.params.email_token;
-
+            var uidgen = new modules.UIDGenerator(48);
             var newPassword = uidgen.generateSync();
 
             User.findOne({ new_password_token: emailToken }, function (err, user) {
