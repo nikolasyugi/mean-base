@@ -104,8 +104,10 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
                 text: 'Para pedir uma nova senha clique no seguinte link: ' + keys.apiUrl + '/api/v1/confirm-password-email/' + email_token
             };
 
-            User.findOne({ email: email }), function (err, user) {
-                if (err) throw err;
+            User.findOne({ email: email }, function (err, user) {
+                if (err) {
+                    throw err;
+                }
                 else {
                     if (!user) return res.status(404).json({ err: "User not found" })
                     else {
@@ -123,7 +125,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt)
                         });
                     }
                 }
-            }
+            })
         },
 
         confirmPasswordEmail: function (req, res) {
