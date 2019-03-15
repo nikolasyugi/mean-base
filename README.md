@@ -1,14 +1,42 @@
 # MeanBase
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+## Environment Variables 
+
+PROJECT_NAME="MEAN Base"
+API_URL="http://localhost:8080"
+NODE_ENV='development'
+MONGO_URL='mongodb://localhost:27017/mean_dev'
+REDIS_URL=''
+
+EMAIL='a@a.com'
+EMAIL_PASSWORD='password'
+GOOGLE_CLIENT_ID='googleclientID'
+GOOGLE_SECRET='googleSecret'
+GOOGLE_REFRESH_TOKEN='googleRefreshtoken'
+
+
+AWS_KEY_ID="AWSkeyID"
+AWS_SECRET_KEY="AWSsecret"
+REGION="us-east-2"
+BUCKET_NAME="mean-base"
+
+## Seed
+
+Run `npm run seed` will run a seed script and add the following user to the database.
+
+```json
+{
+    "email": admin@gmail.com, 
+    "password": 12345678
+}```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run dev` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng g c --name component-name` to generate a new component. 
 
 ## Build
 
