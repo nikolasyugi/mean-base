@@ -106,6 +106,6 @@ export class RequestsService {
 			headers: new HttpHeaders(this.headers),
 			withCredentials: true
 		}
-		return this.http.get<any>(this.apiUrl + '/users/isLogged/', httpOptions)
+		return this.http.get<any>(this.apiUrl + '/user/isLogged/', httpOptions)
 	}
 }
