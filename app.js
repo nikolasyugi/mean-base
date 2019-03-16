@@ -1,7 +1,7 @@
 global.__basedir = __dirname;
 
-var modules = require(__basedir + '/modules.js')();
-var keys = require(__basedir + '/keys.js')();
+var modules = require(__basedir + '/api/modules.js')();
+var keys = require(__basedir + '/api/keys.js')();
 
 const express = modules.express;
 const app = express();

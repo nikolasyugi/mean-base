@@ -51,7 +51,7 @@ module.exports = function () {
 	modules.async = require('async');
 
 	// https://www.npmjs.com/package/multer
-	modules.multer = require('multer');
-
+    modules.multer = require('multer');
+    
     return modules;
 }

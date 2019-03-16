@@ -26,6 +26,4 @@ module.exports = function () {
 	}
 
 	return keys;
-
-	return keys;
 }

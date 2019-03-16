@@ -15,6 +15,11 @@ module.exports = function (keys, modules, schemas, transporter, uidgen, redis, m
 	test.controllers = {};
 	test.controllers.test = require(__basedir + '/api/controllers/test/test-controller.js')(schemas);
 
+
+
+
+	
+
 	//Routes
 	var routes = {};
 	routes.routes = require(__basedir + '/api/routes/router.js')(modules.express, routes);
