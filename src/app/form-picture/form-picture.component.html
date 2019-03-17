@@ -1,0 +1,16 @@
+<div class="row" *ngIf="!loading">
+	<div class="col-lg-12">
+		<label for="file" class="photo-div" [ngStyle]="photoStyle()" type="file" (change)="changePhoto($event)">
+			<div id="loadingPhoto" *ngIf="loading_photo"><i class="fas fa-spinner fa-spin"></i></div>
+		</label>
+	</div>
+	<div style="min-height: 110px;padding-left:15px;padding-top:10px;">
+		<form enctype="multipart/form-data">
+			<input class="file" name="picture" type="file" id="file" (change)="changePhoto($event)">
+		</form>
+		<label for="file" class="btn-blue1-nofill" style="cursor: pointer;" (click)="changePhoto($event)"><img
+				style="padding: 0 10px 3px 0;" src="../../assets/images/ic_photo.svg">
+			Carregar foto
+		</label>
+	</div>
+</div>

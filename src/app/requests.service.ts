@@ -30,11 +30,20 @@ export class RequestsService {
 	}
 
 	getUser(id): any {
+		console.log(id)
 		httpOptions = {
 			headers: new HttpHeaders(this.headers),
 			withCredentials: true
 		}
 		return this.http.get<any>(this.apiUrl + '/users/' + id, httpOptions)
+	}
+
+	getAbout(): any {
+		httpOptions = {
+			headers: new HttpHeaders(this.headers),
+			withCredentials: true
+		}
+		return this.http.get<any>(this.apiUrl + '/user/about', httpOptions)
 	}
 
 	createUser(user): any {

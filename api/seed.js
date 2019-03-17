@@ -10,7 +10,7 @@ var password = "12345678"
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const User = require('./models/User.js')(mongoose, bcrypt);
-const keys = require('./../keys')()
+const keys = require('./keys')()
 
 mongoose.connect(keys.dbUrl, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);

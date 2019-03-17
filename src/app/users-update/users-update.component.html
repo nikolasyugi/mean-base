@@ -11,8 +11,11 @@
 			<label class="inputWrapper" style="margin-top:0px;">
 				<input type="text" name="name" [(ngModel)]="user.name" placeholder="Nome">
 			</label>
+			<p class="box-label">Foto</p>
+			<app-form-picture></app-form-picture>
 			<div class="submitWrapper text-right">
-				<button type="submit" routerLink="/users/common" *ngIf="!loading_submit" class="btn-primary-fill" (click)="updateUser()">
+				<button type="submit" routerLink="/users/common" *ngIf="!loading_submit" class="btn-primary-fill"
+					(click)="updateUser()">
 					Alterar usuário
 				</button>
 				<button class="btn-primary-fill" *ngIf="loading_submit"><i class="fas fa-spinner fa-spin "></i></button>

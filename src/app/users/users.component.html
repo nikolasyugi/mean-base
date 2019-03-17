@@ -12,7 +12,8 @@
 					<h5 class="contentTitle">Lista de Usuários</h5>
 				</div>
 				<div class="col-lg-4 text-right">
-					<button class="btn-secondary-fill" routerLink="/users/common/create"><i class="fas fa-plus"></i>Adicionar Usuário</button>
+					<button class="btn-secondary-fill" routerLink="/users/common/create"><i
+							class="fas fa-plus"></i>Adicionar Usuário</button>
 				</div>
 			</div>
 		</div>
@@ -29,10 +30,11 @@
 					<tr *ngFor="let user of users">
 						<td>{{ user.name }}</td>
 						<td>{{ user.email }}</td>
-						<td><button class="options-btn" (click)="user.optionsOpened = !user.optionsOpened">Opções<i class="fas fa-chevron-down"></i></button>
+						<td><button class="options-btn" (click)="user.optionsOpened = !user.optionsOpened">Opções<i
+									class="fas fa-chevron-down"></i></button>
 							<div class="options-dropdown" [hidden]="!user.optionsOpened">
 								<ul>
-									<!-- <li>Detalhes</li> -->
+									<li routerLink="/users/common/{{user.id}}">Detalhes</li>
 									<li routerLink="/users/common/update/{{user.id}}">Editar</li>
 									<li (click)="openDelete(user, user.id)">Remover</li>
 								</ul>
@@ -48,9 +50,10 @@
 <!-- Remove Modal -->
 <ng-template #removeModal>
 	<div class="modal-body modal-form">
-		<span class="close" aria-label="Close" id="close" (click)="modalRef.hide()"><i style="font-size: 25px" class="fas fa-times"></i></span>
+		<span class="close" aria-label="Close" id="close" (click)="modalRef.hide()"><i style="font-size: 25px"
+				class="fas fa-times"></i></span>
 		<div class="text-center contentModal">
-			<!-- <img src="../assets/img/logo.svg"> -->
+			<!-- <img src="../assets/images/logo.svg"> -->
 			<h4 class="modal-title">Atenção!</h4>
 			<p>Tem certeza que deseja remover este usuário?</p>
 			<div>

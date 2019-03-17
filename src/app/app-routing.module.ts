@@ -9,6 +9,7 @@ import { UsersCreateComponent } from './users-create/users-create.component';
 import { UsersUpdateComponent } from './users-update/users-update.component';
 import { SuperUsersCreateComponent } from './super-users-create/super-users-create.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
+import { UsersDetailsComponent } from './users-details/users-details.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
 	{
 		path: 'users/common',
 		component: UsersComponent,
+		canActivate: []
+	},
+	{
+		path: 'users/common/:id',
+		component: UsersDetailsComponent,
 		canActivate: []
 	},
 	{

@@ -48,4 +48,17 @@ export class UserService {
 		}
 		return this.http.put<any>(this.apiUrl + '/changePassword', body, httpOptions)
 	}
+
+	updatePicture(fd): any {
+		httpOptions = {
+			headers: new HttpHeaders({
+				'Language': 'PT',
+				'Access-Control-Allow-Origin': '*',
+				'withCredentials': 'true'
+			}),
+			withCredentials: true
+		}
+
+		return this.http.put<any>(this.apiUrl + '/user/picture', fd, httpOptions)
+	}
 }

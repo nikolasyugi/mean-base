@@ -28,6 +28,9 @@ import { UsersCreateComponent } from './users-create/users-create.component';
 import { UsersUpdateComponent } from './users-update/users-update.component';
 import { SuperUsersCreateComponent } from './super-users-create/super-users-create.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
+import { UsersDetailsComponent } from './users-details/users-details.component';
+import { FormPictureComponent } from './form-picture/form-picture.component';
+import { ShowPictureComponent } from './show-picture/show-picture.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
@@ -44,6 +47,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		UsersUpdateComponent,
 		SuperUsersCreateComponent,
 		EditPasswordComponent,
+		UsersDetailsComponent,
+		FormPictureComponent,
+		ShowPictureComponent,
 	],
 	imports: [
 		BrowserModule,
