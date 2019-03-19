@@ -34,7 +34,7 @@
 									class="fas fa-chevron-down"></i></button>
 							<div class="options-dropdown" [hidden]="!user.optionsOpened">
 								<ul>
-									<li routerLink="/users/common/{{user.id}}">Detalhes</li>
+									<li routerLink="/users/common/details/{{user.id}}">Detalhes</li>
 									<li routerLink="/users/common/update/{{user.id}}">Editar</li>
 									<li (click)="openDelete(user, user.id)">Remover</li>
 								</ul>

@@ -34,7 +34,7 @@ const routes: Routes = [
 		canActivate: []
 	},
 	{
-		path: 'users/common/:id',
+		path: 'users/common/details/:id',
 		component: UsersDetailsComponent,
 		canActivate: []
 	},

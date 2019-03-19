@@ -21,11 +21,11 @@ export class UsersDetailsComponent implements OnInit {
 	ngOnInit() {
 		this.loading = true;
 		window.scrollTo(0, 0)
-		if (this.location.path().split('/users/common/')[1]) {
-			this.id = this.location.path().split('/users/common/')[1]
+		if (this.location.path().split('/users/common/details/')[1]) {
+			this.id = this.location.path().split('/users/common/details/')[1]
 			this.getUser();
 		} else {
-			this.router.navigate(['/users/common'])
+			this.router.navigate(['/users/common/details/'])
 		}
 	}
 
