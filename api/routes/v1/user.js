@@ -94,7 +94,7 @@ module.exports = function (middlewares, moduleUser, multer) {
             controllers.auth.isLogged(req, res);
         });
 
-        router.put("/user/picture", auth.checkLogged, upload.single("picture"), function (req, res) {
+        router.put("/user/picture/:id", auth.checkLogged, upload.single("picture"), function (req, res) {
             controllers.user.updatePicture(req, res);
         });
 

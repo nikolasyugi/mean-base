@@ -1,8 +1,0 @@
-<div class="row" *ngIf="!loading">
-	<b style="padding-left: 15px;padding-bottom:10px;">Foto</b>
-	<div class="col-lg-12">
-		<label for="file" class="photo-div" [ngStyle]="photoStyle()" type="file" (change)="changePhoto($event)">
-			<div id="loadingPhoto" *ngIf="loading_photo"><i class="fas fa-spinner fa-spin"></i></div>
-		</label>
-	</div>
-</div>

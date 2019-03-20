@@ -97,7 +97,7 @@ export class FormPictureComponent implements OnInit {
 
 	uploadPhoto(fd) {
 
-		this.UserService.updatePicture(fd).subscribe(
+		this.UserService.updatePicture(this.id, fd).subscribe(
 			response => {
 				this.loading_photo = false;
 				this.user = response

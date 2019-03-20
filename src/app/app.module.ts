@@ -30,7 +30,9 @@ import { SuperUsersCreateComponent } from './super-users-create/super-users-crea
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UsersDetailsComponent } from './users-details/users-details.component';
 import { FormPictureComponent } from './form-picture/form-picture.component';
-import { ShowPictureComponent } from './show-picture/show-picture.component';
+import { BannersComponent } from './banners/banners.component';
+import { BannersCreateComponent } from './banners-create/banners-create.component';
+import { BannersUpdateComponent } from './banners-update/banners-update.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
@@ -49,7 +51,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		EditPasswordComponent,
 		UsersDetailsComponent,
 		FormPictureComponent,
-		ShowPictureComponent,
+		BannersComponent,
+		BannersCreateComponent,
+		BannersUpdateComponent,
 	],
 	imports: [
 		BrowserModule,

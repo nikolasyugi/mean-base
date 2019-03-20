@@ -1,0 +1,76 @@
+<div class="loading" [hidden]="!loading"><i class="fas fa-spinner fa-spin fa-4x"></i></div>
+
+<section class="pageWrapper" [hidden]="loading">
+	<div class="pageHeader">
+		<h5 class="pageTitle">Banners</h5>
+		<p class="pageSubtitle">Crie, edite ou remova</p>
+	</div>
+	<div class="contentWrapper">
+		<div class="table-header">
+			<div class="row">
+				<div class="col-lg-8">
+					<h5 class="contentTitle">Lista de Banners</h5>
+				</div>
+				<div class="col-lg-4 text-right">
+					<button class="btn-secondary-fill" routerLink="/banners/create"><i
+							class="fas fa-plus"></i>Adicionar Banner</button>
+				</div>
+			</div>
+		</div>
+		<div class="table-content table-responsive">
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>De</th>
+						<th>Até</th>
+						<th>URL</th>
+						<th>Foto</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let banner of banners">
+						<td>{{ banner.name }}</td>
+						<td>{{ banner.from }}</td>
+						<td>{{ banner.to }}</td>
+						<td>{{ banner.url }}</td>
+						<td><a *ngIf="banner.picture" href="{{ banner.picture }}" target="_blank">Ver foto</a></td>
+						<td><button class="options-btn" (click)="banner.optionsOpened = !banner.optionsOpened">Opções<i
+									class="fas fa-chevron-down"></i></button>
+							<div class="options-dropdown" [hidden]="!banner.optionsOpened">
+								<ul>
+									<li routerLink="/banners/update/{{banner.id}}">Editar</li>
+									<li (click)="openDelete(banner, banner.id)">Remover</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+
+<!-- Remove Modal -->
+<ng-template #removeModal>
+	<div class="modal-body modal-form">
+		<span class="close" aria-label="Close" id="close" (click)="modalRef.hide()"><i style="font-size: 25px"
+				class="fas fa-times"></i></span>
+		<div class="text-center contentModal">
+			<!-- <img src="../assets/images/logo.svg"> -->
+			<h4 class="modal-title">Atenção!</h4>
+			<p>Tem certeza que deseja remover este banner?</p>
+			<div>
+				<div class="row">
+					<div class="col-lg-6">
+						<button class="btn-submit" aria-label="Sim" (click)="deleteBanner()">Sim</button>
+					</div>
+					<div class="col-lg-6">
+						<button class="btn-submit no-btn" aria-label="Não" (click)="modalRef.hide()">Não</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>

@@ -1,0 +1,32 @@
+<section class="pageWrapper">
+	<div class="pageHeader">
+		<h5 class="pageTitle">banners</h5>
+	</div>
+	<div class="contentWrapper">
+		<p class="contentTitle">Adicionar banner</p>
+		<form id="login-box">
+			<p class="box-label">Nome</p>
+			<label class="inputWrapper" style="margin-top:0px;">
+				<input type="text" name="name" [(ngModel)]="name" placeholder="Nome">
+			</label>
+			<p class="box-label">De</p>
+			<label class="inputWrapper">
+				<input type="date" name="from" [(ngModel)]="from" placeholder="Valido de">
+			</label>
+			<p class="box-label">Até</p>
+			<label class="inputWrapper">
+				<input type="date" name="to" [(ngModel)]="to" placeholder="Valido Até">
+			</label>
+			<p class="box-label">Url</p>
+			<label class="inputWrapper">
+				<input type="text" name="url" [(ngModel)]="url" placeholder="URL para link externo">
+            </label>
+			<div class="submitWrapper text-right">
+				<button type="submit" *ngIf="!loading_submit" class="btn-primary-fill" (click)="createBanner()">
+					Adicionar banner
+				</button>
+				<button class="btn-primary-fill" *ngIf="loading_submit"><i class="fas fa-spinner fa-spin "></i></button>
+			</div>
+		</form>
+	</div>
+</section>

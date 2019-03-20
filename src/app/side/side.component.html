@@ -55,6 +55,12 @@
 							</li>
 						</ul>
 					</div>
+                </li>
+                <li class="itemWrapper" [ngClass]="getPathClassMenu('banners')">
+					<div routerLink="/banners" class="menu-item" (click)="closeAll();mobileOpen=false">
+						<i class="fas fa-image"></i>
+						<span>Banners</span>
+					</div>
 				</li>
 			</ul>
 		</nav>

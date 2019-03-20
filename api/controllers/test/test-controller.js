@@ -5,7 +5,6 @@ module.exports = function (schemas) {
 
 	return {
 		get: function (req, res) {
-			console.log( 'asdas')
 			return res.json({ message: 'API is working!' })
 
 		},

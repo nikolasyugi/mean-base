@@ -1,6 +1,6 @@
 module.exports = function (schemas, uidgen, keys, AWS) {
 
-    var User = schemas.User;
+    var Banner = schemas.Banner;
 
     AWS.config.update({
         accessKeyId: keys.configAWS.accessKeyId,
@@ -11,125 +11,69 @@ module.exports = function (schemas, uidgen, keys, AWS) {
     var bucketName = keys.configAWS.bucketName;
 
     return {
-        getSuperUsers: function (req, res) {
 
-            User.find({ role: "admin", email: { $ne: "admin@gmail.com" }, _id: { $ne: req.user._id } }, function (err, users) {
+        getBanners: function (req, res) {
+
+            Banner.find({}, function (err, banners) {
                 if (err) throw err;
                 else {
                     array = []
-                    users.forEach(u => {
-                        array.push(u.mapUser())
+                    banners.forEach(u => {
+                        array.push(u.mapBanner())
                     });
                     res.json(array);
                 }
             });
         },
 
-        getSuperUser: function (req, res) {
+        getBanner: function (req, res) {
 
-            User.findOne({ role: "admin", _id: req.params.id }, function (err, user) {
+            Banner.findOne({_id: req.params.id }, function (err, banner) {
                 if (err) throw err;
                 else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
-                    else res.json(user.mapUser())
+                    if (!banner) return res.status(404).json({ err: "Banner not found" })
+                    else res.json(banner.mapBanner());
                 }
             });
         },
 
-        createSuperUser: function (req, res) {
-            var u = new User({
+        createBanner: function (req, res) {
+
+            var u = new Banner({
                 name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                role: 'admin'
+                from: req.body.from,
+                to: req.body.to,
+                url: req.body.url,
             })
 
-            u.save(function (err, user) {
+            u.save(function (err, banner) {
                 if (err) throw err;
-                else res.send(user.mapUser());
+                else res.send(banner.mapBanner());
             });
         },
 
-        updateSuperUser: function (req, res) {
-
-            User.findOne({ role: "admin", _id: req.params.id }, function (err, user) {
+        updateBanner: function (req, res) {
+            Banner.findOne({_id: req.params.id }, function (err, banner) {
                 if (err) throw err;
                 else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
-                    else user.name = req.body.name;
-                    user.save(function (err, userUpdated) {
+                    if (!banner) return res.status(404).json({ err: "Banner not found" })
+                    else {
+                        banner.name = req.body.name;
+                        banner.from = req.body.from;
+                        banner.to = req.body.to;
+                        banner.url = req.body.url;
+                    }
+                    banner.save(function (err, bannerUpdated) {
                         if (err) throw err;
-                        else return res.json(userUpdated.mapUser());
+                        else res.send(bannerUpdated.mapBanner());
                     });
                 }
             });
         },
 
-        deleteSuperUser: function (req, res) {
+        deleteBanner: function (req, res) {
 
-            User.findOneAndDelete({ role: "admin", _id: req.params.id }, function (err) {
-                if (err) throw err;
-                else return res.json({});
-            });
-        },
-
-        getUsers: function (req, res) {
-
-            User.find({ role: { $ne: "admin" } }, function (err, users) {
-                if (err) throw err;
-                else {
-                    array = []
-                    users.forEach(u => {
-                        array.push(u.mapUser())
-                    });
-                    res.json(array);
-                }
-            });
-        },
-
-        getUser: function (req, res) {
-
-            User.findOne({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
-                if (err) throw err;
-                else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
-                    else res.json(user.mapUser());
-                }
-            });
-        },
-
-        createUser: function (req, res) {
-
-            var u = new User({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                role: 'common'
-            })
-
-            u.save(function (err, user) {
-                if (err) throw err;
-                else res.send(user.mapUser());
-            });
-        },
-
-        updateUser: function (req, res) {
-            User.findOne({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
-                if (err) throw err;
-                else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
-                    else user.name = req.body.name;
-                    user.save(function (err, userUpdated) {
-                        if (err) throw err;
-                        else res.send(userUpdated.mapUser());
-                    });
-                }
-            });
-        },
-
-        deleteUser: function (req, res) {
-
-            User.findOneAndDelete({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
+            Banner.findOneAndDelete({_id: req.params.id }, function (err, banner) {
                 if (err) throw err;
                 else res.send({});
             });
@@ -141,9 +85,10 @@ module.exports = function (schemas, uidgen, keys, AWS) {
                 id = req.params.id
             }
             else {
-                id = req.user._id;
+                return res.status(400).json({ message: 'Missing id parameter' })
             }
-            User.findOne({ _id: id }, function (err, user) {
+            
+            Banner.findOne({ _id: id }, function (err, banner) {
 
                 if (req.file) {
                     var img = req.file.buffer;
@@ -158,10 +103,10 @@ module.exports = function (schemas, uidgen, keys, AWS) {
                     else return res.status(400).json({ message: "You uploaded a ." + fileType + " file, but the picture must be either .jpeg, .jpg or .png" })
                     var imageName = uidgen.generateSync() + '.' + fileType;
 
-                    if (user.picture) {
+                    if (banner.picture) {
                         var params = {
                             Bucket: bucketName,
-                            Key: 'mean_base/' + user.picture.split('/mean_base/')[1],
+                            Key: 'mean_base/' + banner.picture.split('/mean_base/')[1],
                         };
                         s3.deleteObject(params, function (err, data) {
                             if (err) {
@@ -180,10 +125,10 @@ module.exports = function (schemas, uidgen, keys, AWS) {
                                     } else {
                                         var imgUrl = "https://" + keys.configAWS.bucketName + '.s3.' + keys.configAWS.region + ".amazonaws.com/mean_base/" + imageName;
 
-                                        user.picture = imgUrl
-                                        user.save(function (err, userUpdated) {
+                                        banner.picture = imgUrl
+                                        banner.save(function (err, bannerUpdated) {
                                             if (err) throw err;
-                                            else res.send(userUpdated.mapUser());
+                                            else res.send(bannerUpdated.mapBanner());
                                         });
                                     }
                                 });
@@ -202,10 +147,11 @@ module.exports = function (schemas, uidgen, keys, AWS) {
                                 res.status(500).json({ error: "Error -> " + err });
                             } else {
                                 var imgUrl = "https://" + keys.configAWS.bucketName + '.s3.' + keys.configAWS.region + ".amazonaws.com/mean_base/" + imageName;
-                                user.picture = imgUrl
-                                user.save(function (err, userUpdated) {
+
+                                banner.picture = imgUrl
+                                banner.save(function (err, bannerUpdated) {
                                     if (err) throw err;
-                                    else res.send(userUpdated.mapUser());
+                                    else res.send(bannerUpdated.mapBanner());
                                 });
                             }
                         });
@@ -214,10 +160,7 @@ module.exports = function (schemas, uidgen, keys, AWS) {
                     return res.json({ message: 'No file has been uploaded' })
                 }
             })
-        },
-
-        getAbout: function (req, res) {
-            return res.json(req.user.mapUser())
         }
+
     }
 }

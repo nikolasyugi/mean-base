@@ -1,22 +1,27 @@
 <div class="loading" *ngIf="loading"><i class="fas fa-spinner fa-spin fa-4x"></i></div>
 
 <section class="pageWrapper" *ngIf="!loading">
-	<div class="pageHeader">
-		<h5 class="pageTitle">Usuários</h5>
-	</div>
-	<div class="contentWrapper">
-		<p class="contentTitle">Detalhes do usuário</p>
-		<form id="login-box">
-			<p *ngFor="let item of user | keyvalue">
-				<b *ngIf="item.key == 'picture'"><app-show-picture></app-show-picture></b>
-				<b *ngIf="item.key != 'picture'">{{item.key[0].toUpperCase() + item.key.slice(1)}}</b> <br>
-				{{item.value}}</p>
-				
-			<div class="submitWrapper text-right">
-				<button type="text" routerLink="/users/common/update/{{user.id}}" class="btn-primary-fill">
-					Alterar usuário
-				</button>
-			</div>
-		</form>
-	</div>
+    <div class="pageHeader">
+        <h5 class="pageTitle">Usuários</h5>
+    </div>
+    <div class="contentWrapper">
+        <p class="contentTitle">Detalhes do usuário</p>
+        <form id="login-box">
+            <p *ngFor="let item of user | keyvalue">
+                <!-- Picture -->
+                <b *ngIf="item.key == 'picture'">Foto</b>
+                <br>
+                <a *ngIf="item.value && item.key == 'picture'" href="{{item.value}}" target="_blank">Ver foto</a>
+                <!-- Picture -->
+
+                <b *ngIf="item.key != 'picture'">{{item.key[0].toUpperCase() + item.key.slice(1)}}</b> <br>
+                <span *ngIf="item.key != 'picture'">{{item.value}}</span></p>
+
+            <div class="submitWrapper text-right">
+                <button type="text" routerLink="/users/common/update/{{user.id}}" class="btn-primary-fill">
+                    Alterar usuário
+                </button>
+            </div>
+        </form>
+    </div>
 </section>

@@ -10,6 +10,9 @@ import { UsersUpdateComponent } from './users-update/users-update.component';
 import { SuperUsersCreateComponent } from './super-users-create/super-users-create.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { UsersDetailsComponent } from './users-details/users-details.component';
+import { BannersComponent } from './banners/banners.component';
+import { BannersCreateComponent } from './banners-create/banners-create.component';
+import { BannersUpdateComponent } from './banners-update/banners-update.component';
 
 
 const routes: Routes = [
@@ -57,7 +60,22 @@ const routes: Routes = [
 		path: 'users/super_users/create',
 		component: SuperUsersCreateComponent,
 		canActivate: []
-	}
+	},
+	{
+		path: 'banners',
+		component: BannersComponent,
+		canActivate: []
+    },
+    {
+		path: 'banners/create',
+		component: BannersCreateComponent,
+		canActivate: []
+	},
+	{
+		path: 'banners/update/:id',
+		component: BannersUpdateComponent,
+		canActivate: []
+	},
 ];
 
 @NgModule({

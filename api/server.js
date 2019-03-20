@@ -15,6 +15,10 @@ module.exports = function (keys, modules, schemas, transporter, uidgen, redis, m
 	test.controllers = {};
 	test.controllers.test = require(__basedir + '/api/controllers/test/test-controller.js')(schemas);
 
+    //Banner
+	var banner = {};
+	banner.controllers = {};
+	banner.controllers.banner = require(__basedir + '/api/controllers/banner/banner-controller.js')(schemas, uidgen, keys, modules.aws);
 
 
 
@@ -28,6 +32,7 @@ module.exports = function (keys, modules, schemas, transporter, uidgen, redis, m
 	routes.v1 = {};
 	routes.v1.test = require(__basedir + '/api/routes/v1/test.js')(middlewares, test);
 	routes.v1.user = require(__basedir + '/api/routes/v1/user.js')(middlewares, user, modules.multer);
+	routes.v1.banner = require(__basedir + '/api/routes/v1/banner.js')(middlewares, banner, modules.multer);
 
 	return routes.routes;
 
