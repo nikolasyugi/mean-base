@@ -1,32 +1,51 @@
 <section class="pageWrapper">
-	<div class="pageHeader">
-		<h5 class="pageTitle">banners</h5>
-	</div>
-	<div class="contentWrapper">
-		<p class="contentTitle">Adicionar banner</p>
-		<form id="login-box">
-			<p class="box-label">Nome</p>
-			<label class="inputWrapper" style="margin-top:0px;">
-				<input type="text" name="name" [(ngModel)]="banner.name" placeholder="Nome">
-			</label>
-			<p class="box-label">De</p>
-			<label class="inputWrapper">
-				<input type="date" name="from" [(ngModel)]="banner.from" placeholder="Valido de">
-			</label>
-			<p class="box-label">Até</p>
-			<label class="inputWrapper">
-				<input type="date" name="to" [(ngModel)]="banner.to" placeholder="Valido Até">
-			</label>
-			<p class="box-label">Url</p>
-			<label class="inputWrapper">
-				<input type="text" name="url" [(ngModel)]="banner.url" placeholder="URL para link externo">
+    <div class="pageHeader">
+        <h5 class="pageTitle">banners</h5>
+    </div>
+    <div class="contentWrapper">
+        <p class="contentTitle">Adicionar banner</p>
+        <form id="login-box">
+            <p class="box-label">Nome</p>
+            <label class="inputWrapper" style="margin-top:0px;">
+                <input type="text" name="name" [(ngModel)]="banner.name" placeholder="Nome">
             </label>
-			<div class="submitWrapper text-right">
-				<button type="submit" *ngIf="!loading_submit" class="btn-primary-fill" (click)="updateBanner()">
-					Alterar banner
-				</button>
-				<button class="btn-primary-fill" *ngIf="loading_submit"><i class="fas fa-spinner fa-spin "></i></button>
-			</div>
-		</form>
-	</div>
+            <p class="box-label">De</p>
+            <label class="inputWrapper">
+                <input type="datetime-local" name="from" [(ngModel)]="banner.from" placeholder="Valido de">
+            </label>
+            <p class="box-label">Até</p>
+            <label class="inputWrapper">
+                <input type="datetime-local" name="to" [(ngModel)]="banner.to" placeholder="Valido Até">
+            </label>
+            <p class="box-label">Url</p>
+            <label class="inputWrapper">
+                <input type="text" name="url" [(ngModel)]="banner.url" placeholder="URL para link externo">
+            </label>
+            <p class="box-label">Foto</p>
+            <p style="padding-left:15px;"><a *ngIf="banner.picture" href="{{banner.picture}}" target="_blank">Ver
+                    foto</a></p>
+            <div class="row">
+                <div [ngStyle]="loadingPhoto()" style="padding:0 0 0 15px;">
+                    <form enctype="multipart/form-data">
+                        <input class="file" name="picture" type="file" id="file" (change)="changePhoto($event)">
+                    </form>
+                    <label for="file" class="btn-blue1-nofill" style="cursor: pointer;"
+                        (click)="changePhoto($event)"><img style="padding: 0 10px 3px 0;"
+                            src="../../assets/images/ic_photo.svg">
+                        Carregar foto
+                    </label>
+                </div>
+                <div class="photo-loader" *ngIf="loading_photo">
+                    <i class="fas fa-spinner fa-spin "></i>
+                </div>
+            </div>
+
+            <div class="submitWrapper text-right">
+                <button type="submit" *ngIf="!loading_submit" class="btn-primary-fill" (click)="updateBanner()">
+                    Alterar banner
+                </button>
+                <button class="btn-primary-fill" *ngIf="loading_submit"><i class="fas fa-spinner fa-spin "></i></button>
+            </div>
+        </form>
+    </div>
 </section>

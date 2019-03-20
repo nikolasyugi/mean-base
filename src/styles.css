@@ -139,6 +139,12 @@ textarea {
     min-height: calc(100vh - 70px);
 }
 
+.photo-loader {
+    position: absolute;
+    padding: 0 0 0 80px;
+    color: black;
+}
+
 .loading {
     display: flex;
     align-items: center;

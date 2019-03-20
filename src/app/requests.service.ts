@@ -157,12 +157,17 @@ export class RequestsService {
         return this.http.delete<any>(this.apiUrl + '/banners/' + id, httpOptions)
     }
 
-    updatePictureBanner(banner): any {
+    updatePictureBanner(id, fd): any {
+        let headers = {
+            'Language': 'PT',
+            'Access-Control-Allow-Origin': '*',
+            'withCredentials': 'true'
+        }
         httpOptions = {
-            headers: new HttpHeaders(this.headers),
+            headers: new HttpHeaders(headers),
             withCredentials: true
         }
-        return this.http.put<any>(this.apiUrl + '/banner/picture/'+banner.id, httpOptions)
+        return this.http.put<any>(this.apiUrl + '/banner/picture/' + id, fd, httpOptions)
     }
 
 }

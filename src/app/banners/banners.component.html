@@ -32,8 +32,8 @@
 				<tbody>
 					<tr *ngFor="let banner of banners">
 						<td>{{ banner.name }}</td>
-						<td>{{ banner.from }}</td>
-						<td>{{ banner.to }}</td>
+						<td>{{ banner.from | date: 'dd/MM/yyyy hh:mm'}}</td>
+						<td>{{ banner.to | date: 'dd/MM/yyyy hh:mm'}}</td>
 						<td>{{ banner.url }}</td>
 						<td><a *ngIf="banner.picture" href="{{ banner.picture }}" target="_blank">Ver foto</a></td>
 						<td><button class="options-btn" (click)="banner.optionsOpened = !banner.optionsOpened">Opções<i
