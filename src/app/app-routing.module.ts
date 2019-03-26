@@ -17,6 +17,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { FaqsUpdateComponent } from './faqs-update/faqs-update.component';
 import { FaqsDetailsComponent } from './faqs-details/faqs-details.component';
 import { FaqsCreateComponent } from './faqs-create/faqs-create.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,11 @@ const routes: Routes = [
 	{
 		path: 'edit-password',
 		component: EditPasswordComponent,
+		canActivate: []
+    },
+	{
+		path: 'resetPassword',
+		component: ResetPasswordComponent,
 		canActivate: []
 	},
 	{

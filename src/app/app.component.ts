@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
 
 	isLoginComponent() {
 		let currentPath = location.pathname.replace('/', '')
-		if (currentPath == '' || currentPath == 'login') {
+		if (currentPath == '' || currentPath == 'login' || currentPath == 'resetPassword') {
 			return true
 		}
 		return false

@@ -74,5 +74,21 @@ export class UserService {
             email: email
         }
 		return this.http.post<any>(this.apiUrl + '/resetPassword', body, httpOptions)
+    }
+    
+    updatePassword(password, code): any {
+		httpOptions = {
+			headers: new HttpHeaders({
+				'Language': 'PT',
+				'Access-Control-Allow-Origin': '*',
+				'withCredentials': 'true'
+			}),
+			withCredentials: true
+        }
+        let body = {
+            password: password,
+            code: code
+        }
+		return this.http.put<any>(this.apiUrl + '/user/password', body, httpOptions)
 	}
 }

@@ -102,5 +102,8 @@ module.exports = function (middlewares, moduleUser, multer) {
             controllers.user.getAbout(req, res);
         });
 
+        router.put("/user/password", function (req, res) {
+            controllers.auth.updatePassword(req, res);
+        });
     }
 }

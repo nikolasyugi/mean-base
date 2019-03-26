@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
 				this.loading_forgot = false;
 			},
 			() => {
+                this.email = ''
                 this.modalRef.hide();
                 this.app.openGenericModal('Um e-mail foi enviado a você com as instruções para recuperação da sua senha', 'E-mail enviado com sucesso!', 'simple')
 				this.loading_forgot = false;

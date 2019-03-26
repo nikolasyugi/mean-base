@@ -57,7 +57,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt,
             })(req, res, next);
         },
 
-        changePassword: function (req, res) {
+        changePassword: function (req, res) { //change admin password
 
             var user = res.locals.user;
             var oldPassword = req.body.oldPassword;
@@ -92,60 +92,34 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt,
         },
 
         resetPassword: function (req, res) {
-
             var email = req.body.email;
-
             var email_token = uidgen.generateSync();
 
-            var mailOptions = {
-                from: '"Contato" <' + keys.configEmail.email + '>',
-                to: email,
-                subject: keys.projectName + ' - Pedido de nova senha',
-                text: 'Para pedir uma nova senha clique no seguinte link: ' + keys.apiUrl + '/api/v1/confirm-password-email/' + email_token
-            };
-
             User.findOne({ email: email }, function (err, user) {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
-                    else {
-                        user.new_password_token = email_token;
-                        user.save(function (err, userUpdated) {
-                            if (err) throw err;
-                            else {
-                                transporter.sendMail(mailOptions, function (error, info) {
-                                    if (error) {
-                                        return console.log(error);
-                                    }
-                                    return res.json({message: 'Email sent' });
-                                });
-                            }
-                        });
-                    }
-                }
-            })
-        },
-
-        confirmPasswordEmail: function (req, res) {
-
-            var emailToken = req.params.email_token;
-            var uidgen = new modules.UIDGenerator(48);
-            var newPassword = uidgen.generateSync();
-
-            User.findOne({ new_password_token: emailToken }, function (err, user) {
                 if (err) throw err;
                 else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
-                    else {
+                    if (!user) { //user not found
                         var mailOptions = {
                             from: '"Contato" <' + keys.configEmail.email + '>',
-                            to: user.email,
-                            subject: keys.projectName + ' - Nova Senha',
-                            text: 'Sua nova senha é ' + newPassword
+                            to: email,
+                            subject: keys.projectName + ' - Recuperação de senha',
+                            text: 'Infelizmente não encontramos um usuário no sistema cadastrado com o seu e-mail!'
                         };
-                        user.password = newPassword;
+                        transporter.sendMail(mailOptions, function (error, info) {
+                            if (error) {
+                                return console.log(error);
+                            }
+                            return res.json({ message: 'Email sent' });
+                        });
+                    } else { //user found 
+                        var mailOptions = {
+                            from: '"Contato" <' + keys.configEmail.email + '>',
+                            to: email,
+                            subject: keys.projectName + ' - Recuperação de senha',
+                            text: 'Para recuperar sua senha clique no seguinte link: ' + keys.apiUrl + '/resetPassword?code=' + email_token
+                        };
+                        user.new_password_token = email_token;
+                        user.new_password_token_generated = new Date();
                         user.save(function (err, userUpdated) {
                             if (err) throw err;
                             else {
@@ -153,14 +127,54 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt,
                                     if (error) {
                                         return console.log(error);
                                     }
-                                    return res.send('A sua nova senha foi enviada para o seu e-mail!');
+                                    return res.json({ message: 'Email sent' });
                                 });
                             }
                         });
                     }
                 }
             });
+        },
 
+        updatePassword: function (req, res) { //change users password
+
+            var code = req.body.code;
+            var newPassword = req.body.password
+            Date.prototype.addHours = function (h) {
+                this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+                return this;
+            }
+
+            if (code) {
+                User.findOne({ new_password_token: code }, function (err, user) {
+                    if (err) throw err;
+                    else {
+                        if (!user) { //user with that code not found
+                            return res.status(400).json({ message: "Código Inválido" })
+                        } else if (Math.abs(user.new_password_token_generated.addHours(1) - new Date()) < 0) { //(generated + 1h) < now ? true = expired
+                            return res.status(400).json({ message: "Código Expirado" })
+                        } else { //user found and not expired
+                            user.new_password_token_generated = null
+                            user.new_password_token = null
+                            user.password = newPassword;
+                            user.save(function (err, userUpdated) {
+                                if (err) throw err;
+                                else return res.json(userUpdated.mapUser());
+                            });
+                        }
+                    }
+                });
+            } else { //normal change password
+                if (req.user && req.user.role != "admin") {
+                    req.user = req.body.password;
+                    user.save(function (err, userUpdated) {
+                        if (err) throw err;
+                        else return res.json(userUpdated.mapUser());
+                    });
+                } else {
+                    res.status(400).send({ err: "You are not authenticated!" })
+                }
+            }
         }
 
 

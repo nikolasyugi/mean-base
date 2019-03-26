@@ -37,6 +37,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { FaqsCreateComponent } from './faqs-create/faqs-create.component';
 import { FaqsUpdateComponent } from './faqs-update/faqs-update.component';
 import { FaqsDetailsComponent } from './faqs-details/faqs-details.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
@@ -62,6 +63,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		FaqsCreateComponent,
 		FaqsUpdateComponent,
 		FaqsDetailsComponent,
+		ResetPasswordComponent,
 	],
 	imports: [
 		BrowserModule,

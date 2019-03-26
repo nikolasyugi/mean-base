@@ -24,6 +24,7 @@ module.exports = function (mongoose, bcrypt) {
 		role: String,
 		picture: String,
 		new_password_token: String,
+		new_password_token_generated: Date,
 		created_at: Date,
 		updated_at: Date
 	});
