@@ -1,21 +1,45 @@
 <div id="page-bk">
-	<div class="container">
-		<div id="body">
-			<p>Admin <b>Lorem ipsum</b></p>
-			<form id="login-box">
-				<label class="inputWrapper" style="margin-top:0px;">
-					<input type="email" name="login" [(ngModel)]="email" placeholder="LOGIN">
-				</label>
-				<label class="inputWrapper">
-					<input type="password" name="password" [(ngModel)]="password" placeholder="SENHA">
-				</label>
-				<a>
-					<button type="submit" *ngIf="!loading" class="btn-primary-fill" (click)="login()">
-						Entrar
-					</button>
-					<button class="btn-primary-fill" *ngIf="loading"><i class="fas fa-spinner fa-spin "></i></button>
-				</a>
-			</form>
-		</div>
-	</div>
+    <div class="container">
+        <div id="body">
+            <p>Admin <b>Lorem ipsum</b></p>
+            <form id="login-box">
+                <label class="inputWrapper" style="margin-top:0px;">
+                    <input type="email" name="login" [(ngModel)]="email" placeholder="LOGIN">
+                </label>
+                <label class="inputWrapper">
+                    <input type="password" name="password" [(ngModel)]="password" placeholder="SENHA">
+                </label>
+                <p (click)="openModal(forgotPass)" id="forgot">Esqueci a senha</p>
+                <a>
+                    <button type="submit" *ngIf="!loading" class="btn-primary-fill" (click)="login()">
+                        Entrar
+                    </button>
+                    <button class="btn-primary-fill" *ngIf="loading"><i class="fas fa-spinner fa-spin "></i></button>
+                </a>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+
+<!-- Forgot password Modal -->
+<ng-template #forgotPass>
+    <div class="modal-body modal-form">
+        <span class="close" aria-label="Close" id="close" (click)="modalRef.hide()"><i style="font-size: 25px"
+                class="fas fa-times"></i></span>
+        <div class="text-center contentModal">
+            <!-- <img src="../assets/images/logo.svg"> -->
+            <h4 class="modal-title">Recuperação de senha</h4>
+            <p>Insira o e-mail abaixo para recuperar sua senha</p>
+            <label class="inputWrapper">
+                <input type="email" name="email" [(ngModel)]="email" placeholder="E-mail">
+            </label>
+            <div>
+                <div></div>
+                <button class="btn-submit" *ngIf="!loading_forgot" aria-label="Enviar" (click)="forgotPassword()">Enviar e-mail</button>
+                <button class="btn-submit-loader" *ngIf="loading_forgot"><i class="fas fa-spinner fa-spin "></i></button>
+            </div>
+        </div>
+    </div>
+</ng-template>

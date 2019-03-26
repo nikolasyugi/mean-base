@@ -59,5 +59,20 @@ export class UserService {
 			withCredentials: true
 		}
 		return this.http.put<any>(this.apiUrl + '/user/picture/'+ id, fd, httpOptions)
+    }
+    
+    forgotPassword(email): any {
+		httpOptions = {
+			headers: new HttpHeaders({
+				'Language': 'PT',
+				'Access-Control-Allow-Origin': '*',
+				'withCredentials': 'true'
+			}),
+			withCredentials: true
+        }
+        let body = {
+            email: email
+        }
+		return this.http.post<any>(this.apiUrl + '/resetPassword', body, httpOptions)
 	}
 }

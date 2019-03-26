@@ -58,3 +58,24 @@ p {
         left: 13%;
     }
 }
+
+#forgot {
+    color: #999;
+    font-size: 12px;
+    text-align: right;
+}
+
+#forgot:hover {
+    color: #3d9ff8 !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.contentModal p {
+    font-size: 16px;
+}
+
+.inputWrapper input {
+    margin: 0px !important;
+    padding: 0px !important;
+}

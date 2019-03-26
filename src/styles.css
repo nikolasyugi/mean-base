@@ -68,7 +68,6 @@ ul li {
 
 .inputWrapper {
     background: white;
-    padding: 15px;
     border: 1px solid #999;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -305,13 +304,22 @@ table.dataTable tr:nth-child(even), table.dataTable tr {
     float: left;
 }
 
-.btn-submit {
+.btn-submit, .btn-submit-loader {
     padding: 10px 25px;
     border-radius: 5px;
     border: none;
     text-transform: uppercase;
     font-weight: 500;
     min-width: 200px;
+}
+
+.btn-submit-loader {
+    background: var(--primary);
+    color: white;
+    cursor: default;
+}
+
+.btn-submit {
     color: var(--secondary);
     background: white;
 }
