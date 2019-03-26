@@ -151,7 +151,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt,
                     else {
                         if (!user) { //user with that code not found
                             return res.status(400).json({ message: "Código Inválido" })
-                        } else if ((user.new_password_token_generated.addHours(1) - new Date() < 0) { //(generated + 1h) < now ? true = expired
+                        } else if ((user.new_password_token_generated.addHours(1) - new Date() < 0)) { //(generated + 1h) < now ? true = expired
                             return res.status(400).json({ message: "Código Expirado" })
                         } else { //user found and not expired
                             user.new_password_token_generated = null
