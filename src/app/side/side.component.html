@@ -1,68 +1,77 @@
 <header id="main-header">
-	<p><i *ngIf="menuMobile()" (click)="mobileOpen = !mobileOpen" class="fas fa-bars"></i>Admin <b>Lorem ipsum</b></p>
+    <p><i *ngIf="menuMobile()" (click)="mobileOpen = !mobileOpen" class="fas fa-bars"></i>Admin <b>Lorem ipsum</b></p>
 </header>
 <aside [hidden]="!mobileOpen && menuMobile()">
-	<div id="logo-box">
-		<img src="../../assets/images/logo.png">
-		<div id="user-info">
-			<span>{{user.name}}<br>
-				{{user.email}}
-			</span>
-			<button id="dropdown-btn" (click)="dropdownOpen = !dropdownOpen"><i class="fas fa-chevron-down"></i></button>
-		</div>
-		<div id="dropdown-login" [hidden]="!dropdownOpen">
-			<ul>
-				<li routerLink="/edit-password" (click)="dropdownOpen = false; mobileOpen = false;">
-					<i class="fas fa-lock"></i>
-					<span>Alterar senha</span>
-				</li>
-				<li style="border:none;" (click)="openLogout()">
-					<i class="fas fa-sign-out-alt"></i>
-					<span>Sair</span>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div id="menu">
-		<header>
-			Menu
-		</header>
-		<nav>
-			<ul id="main-ul">
+    <div id="logo-box">
+        <img src="../../assets/images/logo.png">
+        <div id="user-info">
+            <span>{{user.name}}<br>
+                {{user.email}}
+            </span>
+            <button id="dropdown-btn" (click)="dropdownOpen = !dropdownOpen"><i
+                    class="fas fa-chevron-down"></i></button>
+        </div>
+        <div id="dropdown-login" [hidden]="!dropdownOpen">
+            <ul>
+                <li routerLink="/edit-password" (click)="dropdownOpen = false; mobileOpen = false;">
+                    <i class="fas fa-lock"></i>
+                    <span>Alterar senha</span>
+                </li>
+                <li style="border:none;" (click)="openLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="menu">
+        <header>
+            Menu
+        </header>
+        <nav>
+            <ul id="main-ul">
 
-				<li class="itemWrapper" [ngClass]="getPathClassMenu('home')">
-					<div routerLink="/home" class="menu-item" (click)="closeAll();mobileOpen=false">
-						<i class="fas fa-home"></i>
-						<span>Home</span>
-					</div>
-				</li>
-				<li class="itemWrapper">
-					<div class="menu-item" (click)="userClicked = !userClicked" [ngClass]="getPathClassMenu('users')">
-						<i class="fas fa-users"></i>
-						<span>Usuários</span>
-						<i *ngIf="!userClicked" class="fas fa-plus"></i>
-						<i *ngIf="userClicked" class="fas fa-minus"></i>
-					</div>
-					<div class="submenu" [hidden]="!userClicked">
-						<ul>
-							<li routerLink="/users/super_users" (click)="mobileOpen=false" [ngClass]="getPathClassSubMenu('super_users')">
-								<i class="far fa-user"></i>
-								<span>Super usuários</span>
-							</li>
-							<li style="border:none;" routerLink="/users/common" (click)="mobileOpen=false" [ngClass]="getPathClassSubMenu('common')">
-								<i class="fas fa-user"></i>
-								<span>Usuários comuns</span>
-							</li>
-						</ul>
-					</div>
+                <li class="itemWrapper" [ngClass]="getPathClassMenu('home')">
+                    <div routerLink="/home" class="menu-item" (click)="closeAll();mobileOpen=false">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </div>
+                </li>
+                <li class="itemWrapper">
+                    <div class="menu-item" (click)="userClicked = !userClicked" [ngClass]="getPathClassMenu('users')">
+                        <i class="fas fa-users"></i>
+                        <span>Usuários</span>
+                        <i *ngIf="!userClicked" class="fas fa-plus"></i>
+                        <i *ngIf="userClicked" class="fas fa-minus"></i>
+                    </div>
+                    <div class="submenu" [hidden]="!userClicked">
+                        <ul>
+                            <li routerLink="/users/super_users" (click)="mobileOpen=false"
+                                [ngClass]="getPathClassSubMenu('super_users')">
+                                <i class="far fa-user"></i>
+                                <span>Super usuários</span>
+                            </li>
+                            <li style="border:none;" routerLink="/users/common" (click)="mobileOpen=false"
+                                [ngClass]="getPathClassSubMenu('common')">
+                                <i class="fas fa-user"></i>
+                                <span>Usuários comuns</span>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="itemWrapper" [ngClass]="getPathClassMenu('banners')">
-					<div routerLink="/banners" class="menu-item" (click)="closeAll();mobileOpen=false">
-						<i class="fas fa-image"></i>
-						<span>Banners</span>
-					</div>
-				</li>
-			</ul>
-		</nav>
-	</div>
+                    <div routerLink="/banners" class="menu-item" (click)="closeAll();mobileOpen=false">
+                        <i class="fas fa-image"></i>
+                        <span>Banners</span>
+                    </div>
+                </li>
+                <li class="itemWrapper" [ngClass]="getPathClassMenu('faqs')">
+                    <div routerLink="/faqs" class="menu-item" (click)="closeAll();mobileOpen=false">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </aside>

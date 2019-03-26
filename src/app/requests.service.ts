@@ -170,4 +170,44 @@ export class RequestsService {
         return this.http.put<any>(this.apiUrl + '/banner/picture/' + id, fd, httpOptions)
     }
 
+    getFaqs(): any {
+        httpOptions = {
+            headers: new HttpHeaders(this.headers),
+            withCredentials: true
+        }
+        return this.http.get<any>(this.apiUrl + '/faqs', httpOptions)
+    }
+
+    getFaq(id): any {
+        httpOptions = {
+            headers: new HttpHeaders(this.headers),
+            withCredentials: true
+        }
+        return this.http.get<any>(this.apiUrl + '/faqs/' + id, httpOptions)
+    }
+
+    createFaq(banner): any {
+        httpOptions = {
+            headers: new HttpHeaders(this.headers),
+            withCredentials: true
+        }
+        return this.http.post<any>(this.apiUrl + '/faqs', banner, httpOptions)
+    }
+
+    updateFaq(id, banner): any {
+        httpOptions = {
+            headers: new HttpHeaders(this.headers),
+            withCredentials: true
+        }
+        return this.http.put<any>(this.apiUrl + '/faqs/' + id, banner, httpOptions)
+    }
+
+    deleteFaq(id): any {
+        httpOptions = {
+            headers: new HttpHeaders(this.headers),
+            withCredentials: true
+        }
+        return this.http.delete<any>(this.apiUrl + '/faqs/' + id, httpOptions)
+    }
+
 }

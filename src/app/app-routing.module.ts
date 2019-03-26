@@ -13,6 +13,10 @@ import { UsersDetailsComponent } from './users-details/users-details.component';
 import { BannersComponent } from './banners/banners.component';
 import { BannersCreateComponent } from './banners-create/banners-create.component';
 import { BannersUpdateComponent } from './banners-update/banners-update.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { FaqsUpdateComponent } from './faqs-update/faqs-update.component';
+import { FaqsDetailsComponent } from './faqs-details/faqs-details.component';
+import { FaqsCreateComponent } from './faqs-create/faqs-create.component';
 
 
 const routes: Routes = [
@@ -74,6 +78,26 @@ const routes: Routes = [
 	{
 		path: 'banners/update/:id',
 		component: BannersUpdateComponent,
+		canActivate: []
+    },
+	{
+		path: 'faqs',
+		component: FaqsComponent,
+		canActivate: []
+    },
+    {
+		path: 'faqs/create',
+		component: FaqsCreateComponent,
+		canActivate: []
+	},
+	{
+		path: 'faqs/update/:id',
+		component: FaqsUpdateComponent,
+		canActivate: []
+	},
+	{
+		path: 'faqs/details/:id',
+		component: FaqsDetailsComponent,
 		canActivate: []
 	},
 ];

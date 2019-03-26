@@ -1,0 +1,28 @@
+<section class="pageWrapper">
+	<div class="pageHeader">
+		<h5 class="pageTitle">FAQs</h5>
+	</div>
+	<div class="contentWrapper">
+		<p class="contentTitle">Adicionar FAQ</p>
+		<form id="login-box">
+			<p class="box-label">Posição</p>
+            <label class="inputWrapper" style="margin-top:0px;">
+                <input type="number" name="name" [(ngModel)]="position" placeholder="Posição">
+            </label>
+            <p class="box-label">Pergunta</p>
+            <label class="inputWrapper">
+                <input type="text" name="question" [(ngModel)]="question" placeholder="Pergunta">
+            </label>
+            <p class="box-label">Resposta</p>
+            <label class="inputWrapper">
+                <textarea type="text" name="answer" [(ngModel)]="answer" placeholder="Resposta"></textarea>
+            </label>
+			<div class="submitWrapper text-right">
+				<button type="submit" *ngIf="!loading_submit" class="btn-primary-fill" (click)="createFaq()">
+					Adicionar FAQ
+				</button>
+				<button class="btn-primary-fill" *ngIf="loading_submit"><i class="fas fa-spinner fa-spin "></i></button>
+			</div>
+		</form>
+	</div>
+</section>

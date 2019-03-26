@@ -1,0 +1,22 @@
+<div class="loading" *ngIf="loading"><i class="fas fa-spinner fa-spin fa-4x"></i></div>
+
+<section class="pageWrapper" *ngIf="!loading">
+    <div class="pageHeader">
+        <h5 class="pageTitle">FAQs</h5>
+    </div>
+    <div class="contentWrapper">
+        <p class="contentTitle">Detalhes do FAQ</p>
+        <form id="login-box">
+            <p *ngFor="let item of faq | keyvalue">
+
+                <b *ngIf="item.key != 'picture'">{{item.key[0].toUpperCase() + item.key.slice(1)}}</b> <br>
+                <span *ngIf="item.key != 'picture'">{{item.value}}</span></p>
+
+            <div class="submitWrapper text-right">
+                <button type="text" routerLink="/faqs/update/{{faq.id}}" class="btn-primary-fill">
+                    Alterar FAQ
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

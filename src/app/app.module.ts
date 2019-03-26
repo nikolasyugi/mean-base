@@ -33,6 +33,10 @@ import { FormPictureComponent } from './form-picture/form-picture.component';
 import { BannersComponent } from './banners/banners.component';
 import { BannersCreateComponent } from './banners-create/banners-create.component';
 import { BannersUpdateComponent } from './banners-update/banners-update.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { FaqsCreateComponent } from './faqs-create/faqs-create.component';
+import { FaqsUpdateComponent } from './faqs-update/faqs-update.component';
+import { FaqsDetailsComponent } from './faqs-details/faqs-details.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 	direction: 'horizontal',
@@ -54,6 +58,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 		BannersComponent,
 		BannersCreateComponent,
 		BannersUpdateComponent,
+		FaqsComponent,
+		FaqsCreateComponent,
+		FaqsUpdateComponent,
+		FaqsDetailsComponent,
 	],
 	imports: [
 		BrowserModule,

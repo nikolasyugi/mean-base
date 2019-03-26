@@ -1,0 +1,73 @@
+<div class="loading" [hidden]="!loading"><i class="fas fa-spinner fa-spin fa-4x"></i></div>
+
+<section class="pageWrapper" [hidden]="loading">
+	<div class="pageHeader">
+		<h5 class="pageTitle">Faqs</h5>
+		<p class="pageSubtitle">Crie, edite ou remova</p>
+	</div>
+	<div class="contentWrapper">
+		<div class="table-header">
+			<div class="row">
+				<div class="col-lg-8">
+					<h5 class="contentTitle">Lista de Faqs</h5>
+				</div>
+				<div class="col-lg-4 text-right">
+					<button class="btn-secondary-fill" routerLink="/faqs/create"><i
+							class="fas fa-plus"></i>Adicionar Faq</button>
+				</div>
+			</div>
+		</div>
+		<div class="table-content table-responsive">
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+				<thead>
+					<tr>
+						<th>Posição</th>
+						<th>Pergunta</th>
+						<th>Resposta</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let faq of faqs">
+						<td>{{ faq.position }}</td>
+						<td>{{ faq.question}}</td>
+						<td>{{ faq.answer}}</td>
+						<td><button class="options-btn" (click)="faq.optionsOpened = !faq.optionsOpened">Opções<i
+									class="fas fa-chevron-down"></i></button>
+							<div class="options-dropdown" [hidden]="!faq.optionsOpened">
+								<ul>
+									<li routerLink="/faqs/details/{{faq.id}}">Detalhes</li>
+									<li routerLink="/faqs/update/{{faq.id}}">Editar</li>
+									<li (click)="openDelete(faq, faq.id)">Remover</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+
+<!-- Remove Modal -->
+<ng-template #removeModal>
+	<div class="modal-body modal-form">
+		<span class="close" aria-label="Close" id="close" (click)="modalRef.hide()"><i style="font-size: 25px"
+				class="fas fa-times"></i></span>
+		<div class="text-center contentModal">
+			<!-- <img src="../assets/images/logo.svg"> -->
+			<h4 class="modal-title">Atenção!</h4>
+			<p>Tem certeza que deseja remover este faq?</p>
+			<div>
+				<div class="row">
+					<div class="col-lg-6">
+						<button class="btn-submit" aria-label="Sim" (click)="deleteFaq()">Sim</button>
+					</div>
+					<div class="col-lg-6">
+						<button class="btn-submit no-btn" aria-label="Não" (click)="modalRef.hide()">Não</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>
