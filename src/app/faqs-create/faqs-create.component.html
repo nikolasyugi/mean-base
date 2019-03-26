@@ -14,9 +14,7 @@
                 <input type="text" name="question" [(ngModel)]="question" placeholder="Pergunta">
             </label>
             <p class="box-label">Resposta</p>
-            <label class="inputWrapper">
                 <textarea type="text" name="answer" [(ngModel)]="answer" placeholder="Resposta"></textarea>
-            </label>
 			<div class="submitWrapper text-right">
 				<button type="submit" *ngIf="!loading_submit" class="btn-primary-fill" (click)="createFaq()">
 					Adicionar FAQ

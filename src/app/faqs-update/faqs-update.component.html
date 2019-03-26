@@ -14,9 +14,7 @@
                 <input type="text" name="question" [(ngModel)]="faq.question" placeholder="Pergunta">
             </label>
             <p class="box-label">Resposta</p>
-            <label class="inputWrapper">
-                <textarea type="text" name="answer" [(ngModel)]="faq.answer" placeholder="Resposta"></textarea>
-            </label>
+            <textarea type="text" name="answer" [(ngModel)]="faq.answer" placeholder="Resposta"></textarea>
             <div class="submitWrapper text-right">
                 <button type="submit" *ngIf="!loading_submit" class="btn-primary-fill" (click)="updateFaq()">
                     Alterar FAQ
