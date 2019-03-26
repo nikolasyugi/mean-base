@@ -23,7 +23,7 @@ module.exports = function (schemas) {
             Faq.findOne({_id: req.params.id }, function (err, faq) {
                 if (err) throw err;
                 else {
-                    if (!faq) return res.status(404).json({ err: "Faq not found" })
+                    if (!faq) return res.status(404).json({ message: "Faq not found" })
                     else res.json(faq.mapFaq());
                 }
             });
@@ -47,7 +47,7 @@ module.exports = function (schemas) {
             Faq.findOne({_id: req.params.id }, function (err, faq) {
                 if (err) throw err;
                 else {
-                    if (!faq) return res.status(404).json({ err: "Faq not found" })
+                    if (!faq) return res.status(404).json({ message: "Faq not found" })
                     else {
                         faq.position = req.body.position;
                         faq.question = req.body.question;

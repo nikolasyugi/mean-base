@@ -39,7 +39,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt,
                         return res.json(user.mapUser())
                     });
                 } else {
-                    return res.status(400).json({ err: 'You are not authorized' })
+                    return res.status(400).json({ message: 'You are not authorized' })
                 }
 
             })(req, res, next);
@@ -73,21 +73,21 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt,
                             bcrypt.hash(password, 10).then(hash => {
                                 password = hash;
                                 User.findOneAndUpdate({ _id: user._id }, { password: password }, function (err) {
-                                    if (err) return res.json({ err: err })
+                                    if (err) return res.json({ message: err })
                                     return res.json({ message: 'Password Changed' });
                                 })
                             });
                         } else {
-                            return res.status(400).json({ err: 'Old password is incorrect' })
+                            return res.status(400).json({ message: 'Old password is incorrect' })
                         }
                     } else {
-                        return res.status(400).json({ err: 'Password and passowrd confirmation are different' })
+                        return res.status(400).json({ message: 'Password and passowrd confirmation are different' })
                     }
                 } else {
-                    return res.status(400).json({ err: 'Password length must be greater than 8' })
+                    return res.status(400).json({ message: 'Password length must be greater than 8' })
                 }
             } else {
-                return res.status(400).json({ err: 'New and old password are the same' })
+                return res.status(400).json({ message: 'New and old password are the same' })
             }
         },
 
@@ -172,7 +172,7 @@ module.exports = function (keys, schemas, uidgen, transporter, passport, bcrypt,
                         else return res.json(userUpdated.mapUser());
                     });
                 } else {
-                    res.status(400).send({ err: "You are not authenticated!" })
+                    res.status(400).send({ message: "You are not authenticated!" })
                 }
             }
         }

@@ -30,7 +30,7 @@ module.exports = function (schemas, uidgen, keys, AWS) {
             User.findOne({ role: "admin", _id: req.params.id }, function (err, user) {
                 if (err) throw err;
                 else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
+                    if (!user) return res.status(404).json({ message: "User not found" })
                     else res.json(user.mapUser())
                 }
             });
@@ -55,7 +55,7 @@ module.exports = function (schemas, uidgen, keys, AWS) {
             User.findOne({ role: "admin", _id: req.params.id }, function (err, user) {
                 if (err) throw err;
                 else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
+                    if (!user) return res.status(404).json({ message: "User not found" })
                     else user.name = req.body.name;
                     user.save(function (err, userUpdated) {
                         if (err) throw err;
@@ -92,7 +92,7 @@ module.exports = function (schemas, uidgen, keys, AWS) {
             User.findOne({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
                 if (err) throw err;
                 else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
+                    if (!user) return res.status(404).json({ message: "User not found" })
                     else res.json(user.mapUser());
                 }
             });
@@ -117,7 +117,7 @@ module.exports = function (schemas, uidgen, keys, AWS) {
             User.findOne({ role: { $ne: "admin" }, _id: req.params.id }, function (err, user) {
                 if (err) throw err;
                 else {
-                    if (!user) return res.status(404).json({ err: "User not found" })
+                    if (!user) return res.status(404).json({ message: "User not found" })
                     else user.name = req.body.name;
                     user.save(function (err, userUpdated) {
                         if (err) throw err;

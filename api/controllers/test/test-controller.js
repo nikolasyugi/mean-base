@@ -11,7 +11,7 @@ module.exports = function (schemas) {
 
 		getAuth: function (req, res) {
 
-			return res.json({ err: 'You\'re authorized!' })
+			return res.json({ message: 'You\'re authorized!' })
 
 		}
 	}

@@ -36,7 +36,7 @@ export class FaqsCreateComponent implements OnInit {
 			response => {
 			},
 			err => {
-				if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+				if (err.error.message) this.app.openGenericModal(err.error.message, 'Ops!', 'simple')
 				else console.log(err)
 			},
 			() => {

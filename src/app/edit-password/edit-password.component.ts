@@ -37,7 +37,7 @@ export class EditPasswordComponent implements OnInit {
 				response => {
 				},
 				err => {
-					if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+					if (err.error.message) this.app.openGenericModal(err.error.message, 'Ops!', 'simple')
 					console.log(err)
 					this.loading_submit = false;
 				},

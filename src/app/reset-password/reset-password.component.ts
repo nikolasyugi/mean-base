@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
                 response => {
                 },
                 err => {
-                    if (err.error.err) this.app.openGenericModal(err.error.err, 'Ops!', 'simple')
+                    if (err.error.message) this.app.openGenericModal(err.error.message, 'Ops!', 'simple')
                     else if (err.error.message) this.app.openGenericModal(err.error.message, 'Ops!', 'simple')
                     else console.log(err)
                     this.loading = false;

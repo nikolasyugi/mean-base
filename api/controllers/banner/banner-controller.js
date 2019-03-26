@@ -31,7 +31,7 @@ module.exports = function (schemas, uidgen, keys, AWS) {
             Banner.findOne({_id: req.params.id }, function (err, banner) {
                 if (err) throw err;
                 else {
-                    if (!banner) return res.status(404).json({ err: "Banner not found" })
+                    if (!banner) return res.status(404).json({ message: "Banner not found" })
                     else res.json(banner.mapBanner());
                 }
             });
@@ -56,7 +56,7 @@ module.exports = function (schemas, uidgen, keys, AWS) {
             Banner.findOne({_id: req.params.id }, function (err, banner) {
                 if (err) throw err;
                 else {
-                    if (!banner) return res.status(404).json({ err: "Banner not found" })
+                    if (!banner) return res.status(404).json({ message: "Banner not found" })
                     else {
                         banner.name = req.body.name;
                         banner.from = req.body.from;
