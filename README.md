@@ -6,21 +6,21 @@ This is a seed project using the MEAN stack structure. The front end was develop
 
 ## Environment Variables 
 
-###General
+### General
 PROJECT_NAME="MEAN Base"<br />
 API_URL="http://localhost:8080"<br />
 NODE_ENV='development'<br />
 MONGO_URL='mongodb://localhost:27017/mean_dev'<br />
 REDIS_URL=''<br />
 
-###Google emailing
+### Google emailing
 EMAIL='a@a.com'<br />
 EMAIL_PASSWORD='password'<br />
 GOOGLE_CLIENT_ID='googleclientID'<br />
 GOOGLE_SECRET='googleSecret'<br />
 GOOGLE_REFRESH_TOKEN='googleRefreshtoken'<br />
 
-###AWS
+### AWS
 AWS_KEY_ID="AWSkeyID"<br />
 AWS_SECRET_KEY="AWSsecret"<br />
 REGION="us-east-2"<br />
