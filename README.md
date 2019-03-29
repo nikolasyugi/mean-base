@@ -6,6 +6,8 @@ This is a seed project using the MEAN stack structure. The front end was develop
 
 ## Environment Variables 
 
+Create a .env file and populate with the following variables:
+
 ### General
 PROJECT_NAME="MEAN Base"<br />
 API_URL="http://localhost:8080"<br />
