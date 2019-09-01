@@ -248,7 +248,6 @@ table.dataTable tr:nth-child(even), table.dataTable tr {
 
 .modal-form {
     padding: 30px;
-    background: var(--secondary);
     color: white;
 }
 
@@ -260,6 +259,7 @@ table.dataTable tr:nth-child(even), table.dataTable tr {
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
     border-radius: 0px !important;
+    background: var(--secondary);
 }
 
 .modalHeader {
