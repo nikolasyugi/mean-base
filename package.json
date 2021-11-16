@@ -27,7 +27,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "angular-datatables": "^7.0.0",
     "async": "^2.6.1",
-    "aws-sdk": "^2.399.0",
+    "aws-sdk": "^2.814.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.2.1",
